@@ -16,6 +16,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
      */
     public frmAdministraScan() {
         initComponents();
+        visualizaSubSistemas();
+        
     }
 
     /**
@@ -41,8 +43,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
         scrollCT = new javax.swing.JScrollPane();
         listaCT = new javax.swing.JList();
         panelCURP = new javax.swing.JPanel();
-        scrollCURP = new javax.swing.JScrollPane();
-        listaCURP = new javax.swing.JList();
+        scrollPlantilla = new javax.swing.JScrollPane();
+        listaPlantilla = new javax.swing.JList();
         panelDocumentos = new javax.swing.JPanel();
         scrollDocumentos = new javax.swing.JScrollPane();
         listaDocumentos = new javax.swing.JList();
@@ -108,6 +110,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
         listaSubSistema.setBackground(new java.awt.Color(240, 240, 240));
         listaSubSistema.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         listaSubSistema.setForeground(new java.awt.Color(102, 102, 102));
+        listaSubSistema.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaSubSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaSubSistema.setFocusable(false);
         listaSubSistema.setRequestFocusEnabled(false);
@@ -173,16 +176,16 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
         panelCURP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        listaCURP.setBackground(new java.awt.Color(240, 240, 240));
-        listaCURP.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        listaCURP.setForeground(new java.awt.Color(102, 102, 102));
-        listaCURP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listaCURP.setFocusable(false);
-        listaCURP.setRequestFocusEnabled(false);
-        listaCURP.setSelectionBackground(new java.awt.Color(153, 153, 153));
-        listaCURP.setVerifyInputWhenFocusTarget(false);
-        listaCURP.setVisibleRowCount(0);
-        scrollCURP.setViewportView(listaCURP);
+        listaPlantilla.setBackground(new java.awt.Color(240, 240, 240));
+        listaPlantilla.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        listaPlantilla.setForeground(new java.awt.Color(102, 102, 102));
+        listaPlantilla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaPlantilla.setFocusable(false);
+        listaPlantilla.setRequestFocusEnabled(false);
+        listaPlantilla.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        listaPlantilla.setVerifyInputWhenFocusTarget(false);
+        listaPlantilla.setVisibleRowCount(0);
+        scrollPlantilla.setViewportView(listaPlantilla);
 
         javax.swing.GroupLayout panelCURPLayout = new javax.swing.GroupLayout(panelCURP);
         panelCURP.setLayout(panelCURPLayout);
@@ -192,7 +195,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
             .addGroup(panelCURPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelCURPLayout.createSequentialGroup()
                     .addGap(3, 3, 3)
-                    .addComponent(scrollCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(scrollPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGap(3, 3, 3)))
         );
         panelCURPLayout.setVerticalGroup(
@@ -201,7 +204,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
             .addGroup(panelCURPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelCURPLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(scrollCURP, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -273,7 +276,19 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //debe de pintar en el JList listaSubSistema los subsistemas
+   public void visualizaSubSistemas(){
+    
+}
+   //pinta en el JList listaCT la clave de todos los CT del subsistemas
+   public void visualizaCTSubSistema(){
+       
+   }
+   
+   //pinta en el Jlist listaPlantilla la clave CURP de los empleados de ese CT
+   public void visualizaPlantillaCT(){
+       
+   }
     /**
      * @param args the command line arguments
      */
@@ -308,14 +323,15 @@ public class frmAdministraScan extends javax.swing.JFrame {
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList listaCT;
-    private javax.swing.JList listaCURP;
     private javax.swing.JList listaDocumentos;
+    private javax.swing.JList listaPlantilla;
     private javax.swing.JList listaSubSistema;
     private javax.swing.JPanel panelCT;
     private javax.swing.JPanel panelCURP;
@@ -323,8 +339,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
     private javax.swing.JPanel panelDocumentos;
     private javax.swing.JPanel panelSubSistema;
     private javax.swing.JScrollPane scrollCT;
-    private javax.swing.JScrollPane scrollCURP;
     private javax.swing.JScrollPane scrollDocumentos;
+    private javax.swing.JScrollPane scrollPlantilla;
     private javax.swing.JScrollPane scrollSubSistema;
     private javax.swing.JLabel txtExpedientesCompletos;
     private javax.swing.JLabel txtExpedientesEscaneados;

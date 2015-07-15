@@ -14,13 +14,15 @@ import java.util.ArrayList;
 public class SubSistema {
     private String  claveSubSistema;
     private String  nombreSubSistema;
-    private CentroTrabajo[] CentrosTrabajoSubsistema;   
-    public ArrayList<String> getAllSubSistema(){
+    private ArrayList<CentroTrabajo> CentrosTrabajoSubsistema;  
+    //lee de la base de datos todos los subsistemas
+    public ArrayList<SubSistema> getAllSubSistema(){
         
         return null;
         
     }
-    public ArrayList getCTSubSistema(String SubSistema){
+    //regresa todos los CT dentro de un Subsistema
+    public ArrayList<CentroTrabajo> getCTSubSistema(String SubSistema){
         return null;
         
     }
