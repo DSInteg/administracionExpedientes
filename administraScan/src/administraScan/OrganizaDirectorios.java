@@ -66,7 +66,8 @@ public class OrganizaDirectorios {
     }
     
     public void clasificar(){        
-        String ruta = conf.carpetaRemota+"aceptados\\";
+        //String ruta = conf.carpetaRemota+"aceptados\\";
+        String ruta = conf.carpetaRemota+"aceptados/";
         File f = new File(ruta);    
         FileUtils Files = new FileUtils();
         String ct = "";
@@ -83,11 +84,14 @@ public class OrganizaDirectorios {
                 else
                 {
                     String prueba = (String)(names.get(i).toString());
-                    String rutadestino = conf.carpetaCT + "\\" + names.get(i) + "\\";
+                    //String rutadestino = conf.carpetaCT + "\\" + names.get(i) + "\\";
+                    String rutadestino = conf.carpetaCT + "/" + names.get(i) + "/";
                     //System.out.println("CT:"+ct);
                     //System.out.println(rutadestino);
-                    File destino = new File(conf.carpetaCT + ct + "\\" /*+ names.get(i) + "\\"*/);
-                    File origen = new File(ruta+names.get(i)+"\\");   
+                    //File destino = new File(conf.carpetaCT + ct + "\\" /*+ names.get(i) + "\\"*/);
+                    File destino = new File(conf.carpetaCT + ct + "/" /*+ names.get(i) + "\\"*/);
+                    //File origen = new File(ruta+names.get(i)+"\\");
+                    File origen = new File(ruta+names.get(i)+"/");
                     try {
                         //System.out.println(origen);
                         //System.out.println(destino);
