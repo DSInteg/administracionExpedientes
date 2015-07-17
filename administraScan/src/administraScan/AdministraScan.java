@@ -6,8 +6,15 @@
 package administraScan;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +22,7 @@ import java.util.Arrays;
  */
 public class AdministraScan {
     private final Configuracion conf;
+    private Connection connection;
     
     public AdministraScan(){
         this.conf = new Configuracion();
@@ -31,6 +39,63 @@ public class AdministraScan {
         //System.out.println(str);
         return str;
     }
+    //Eli
+    
+    public void conectarbd()
+    {
+        
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(conf.DATABASE_URL, conf.USUARIO, conf.PASSWORD);
+            System.out.println("Conectado");
+        }
+        catch (ClassNotFoundException | SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+    }
+    //aqui le empecé a mover
+    public ArrayList<SubSistema> getAllSubsistemas(){
+      //  ArrayList IDSub <String>= new ArrayList
+        ArrayList <SubSistema> subsistemas = new ArrayList<>(); 
+        String Nivel_Educativo ="";
+        ArrayList<String> IDSub=new ArrayList<>();
+        this.conectarbd();
+        String consultaSubsistemas="Select nivel_educativo from cg_nivel_educativo";
+        System.out.println(consultaSubsistemas);
+           
+        try {
+             PreparedStatement SPreparada;
+            SPreparada= connection.prepareStatement(consultaSubsistemas);
+            //SPreparada.setString(1,);
+               ResultSet resultadoSubsistemas=SPreparada.executeQuery();
+
+               if(resultadoSubsistemas.next()){
+                   Nivel_Educativo=resultadoSubsistemas.getString("nivel_educativo").trim();
+                   IDSub.add(Nivel_Educativo);
+                   System.out.println("Subsistema");
+               }
+
+               SPreparada.close();
+               connection.close(); 
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministraScan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+        for (String id : IDSub )
+        {
+            SubSistema sub =new SubSistema(id);
+            subsistemas.add(sub);
+        }
+            
+        return  subsistemas;        
+          
+    }
+
+//lee de la base de datos todos los subsistemas
 
     public ArrayList<SubSistema> getsubsistemas(ArrayList<String> cts)
     {
@@ -155,22 +220,5 @@ public class AdministraScan {
                 System.out.println("# de documentos: " + empleado.getExpediente().getDocumentacion().size());
             }
         }
-        /*for(Empleado empleado : empleados)
-        {
-            System.out.println("********************+");
-            System.out.println("Empleado: " + empleado.getCURP());
-            System.out.println("Expediente: " + empleado.getExpediente().getClave());
-            System.out.println("# de documentos: " + empleado.getExpediente().getDocumentacion().size());
-        }*/
-        /*for (CentroTrabajo centrot : centros_trabajo)
-        {
-            if(!centrot.getPantillaEmpleados().isEmpty()){
-                for (Empleado empleado : centrot.getPantillaEmpleados())
-                {
-                    System.out.println(empleado.getCURP());
-                    System.out.println("------------------");
-                }
-            }
-        }*/
     }
 }
