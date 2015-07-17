@@ -45,7 +45,7 @@ public class SubSistema {
         this.getDatosSubsistema(clave);
     }
     
-    private void getDatosSubsistema(String clave/*ArrayList subsistemas*/ ){
+    private void getDatosSubsistema(String clave){
         String Id;
         this.conectarbd();
         String consultaDescripcionSS="Select descripcion from cg_nivel_educativo";
@@ -70,15 +70,9 @@ public class SubSistema {
          Logger.getLogger(SubSistema.class.getName()).log(Level.SEVERE, null, ex);
          
      }
-            
-            
-          
-    }//
-        
-        
-    
+                  
     }
-    
+        
     public String getClaveSubSistema(){
         return this.claveSubSistema;
     }
