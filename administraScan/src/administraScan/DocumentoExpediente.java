@@ -16,7 +16,7 @@ public class DocumentoExpediente {
     private String Direccion;
     private String Clave;
     
-    public DocumentoExpediente(String clave)
+    public DocumentoExpediente(String clave, Boolean escaneado)
     {
         Configuracion conf = new Configuracion();
         this.Clave = clave;
@@ -28,6 +28,7 @@ public class DocumentoExpediente {
         {
             this.Obligatorio = false;
         }
+        this.Escaneado = escaneado;
         
     }
     
@@ -39,5 +40,10 @@ public class DocumentoExpediente {
     public Boolean getObligatorio()
     {
         return this.Obligatorio;
+    }
+    
+    public Boolean getEscaneado()
+    {
+        return this.Escaneado;
     }
 }

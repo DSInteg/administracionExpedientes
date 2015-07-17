@@ -35,7 +35,7 @@ public class Empleado {
         {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(conf.DATABASE_URL, conf.USUARIO, conf.PASSWORD);
-            System.out.println("Conectado");
+            //System.out.println("Conectado");
         }
         catch (ClassNotFoundException | SQLException sqlException)
         {
@@ -62,7 +62,7 @@ public class Empleado {
     public void obtenerDatosEmpleado(String curp){
         this.conectarbd();
         String consultaDatos="Select nombre, paterno, materno, ct from curp_rfc where curp =?";
-        System.out.println(consultaDatos);
+        //System.out.println(consultaDatos);
         //String Nombre="";
             
             
@@ -79,7 +79,7 @@ public class Empleado {
                 CentroTrabajo ct = new CentroTrabajo(resultadoDatosEmpleado.getString("ct").trim());
                 CTEmpleado=ct;
 
-               System.out.println("Nombre"+Nombre+Paterno+Materno);
+               //System.out.println("Nombre"+Nombre+Paterno+Materno);
             }
                         
             SPreparada.close();

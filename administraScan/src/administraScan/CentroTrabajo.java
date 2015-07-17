@@ -15,13 +15,10 @@ public class CentroTrabajo {
     private ArrayList<Empleado> PlantillaEmpleados;
     
     public CentroTrabajo(String claveCT){
+        this.PlantillaEmpleados = new ArrayList<>();
         this.claveCT=claveCT;
         //PlantillaEmpleados=obtenerPlantillaEmpleados();
         
-    }
-
-    CentroTrabajo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public String getClaveCT()

@@ -8,6 +8,7 @@ package administraScan;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  *
@@ -15,21 +16,32 @@ import java.util.Arrays;
  */
 public class AdministraScan {
     private final Configuracion conf;
+    HashMap<String, String> DOCUMENTOS;
     
     public AdministraScan(){
         this.conf = new Configuracion();
+        this.DOCUMENTOS = new HashMap();
+        for(int i = 0; i<conf.CLAVES_DOC.length; i++)
+        {
+            this.DOCUMENTOS.put(conf.CLAVES_DOC[i], conf.NOMBRES_DOC[i]);
+        }
     }
     
-    public String RetornaCT(String nombre){
-        String str="";
-        StringBuffer cadena = new StringBuffer();                          
-        String[] parts_doc = nombre.split("_");
-        String [] extension_doc = parts_doc[parts_doc.length-1].split("\\.");
-        String [] resultado = extension_doc[extension_doc.length-2].split("");
-        cadena =cadena.append(extension_doc[extension_doc.length-2]);
-        str = cadena.toString();
-        //System.out.println(str);
-        return str;
+    public ArrayList<String> RetornaCT(ArrayList<String> nombres){
+        ArrayList<String> claves = new ArrayList<>();
+        for(String nombre : nombres){
+            String str="";
+            StringBuffer cadena = new StringBuffer();
+            String[] parts_doc = nombre.split("_");
+            String [] extension_doc = parts_doc[parts_doc.length-1].split("\\.");
+            String [] resultado = extension_doc[extension_doc.length-2].split("");
+            cadena =cadena.append(extension_doc[extension_doc.length-2]);
+            str = cadena.toString();
+            if(!claves.contains(str)){
+                claves.add(str);
+            }
+        }
+        return claves;
     }
 
     public ArrayList<SubSistema> getsubsistemas(ArrayList<String> cts)
@@ -48,7 +60,6 @@ public class AdministraScan {
         for(String key : keys_subsis)
         {
             SubSistema subs = new SubSistema(key);
-            //System.out.println(subs.getClaveSubSistema());
             subsistemas.add(subs);
         }
         return subsistemas;
@@ -63,7 +74,6 @@ public class AdministraScan {
             if (!cts.contains(centrot))
             {
                 cts.add(centrot);
-                //System.out.println(centrot.getClaveCT());
             }
         }
         return cts;
@@ -78,7 +88,6 @@ public class AdministraScan {
             if (!empleados.contains(empleado))
             {
                 empleados.add(empleado);
-                //System.out.println(empleado.getCURP());
             }
         }
         return empleados;
@@ -87,15 +96,21 @@ public class AdministraScan {
     public ArrayList<DocumentoExpediente> getDocumentos(ArrayList<String> docs)
     {
         ArrayList<DocumentoExpediente> documentos = new ArrayList<>();
-        for (String doc : docs)
+        ArrayList<String> claves = this.RetornaCT(docs);
+        Boolean escaneado;
+        for (String clave : conf.CLAVES_DOC)
         {
-            String clave = this.RetornaCT(doc);
-            DocumentoExpediente documento = new DocumentoExpediente(clave);
+            if(claves.contains(clave)){
+                escaneado = true;
+            }
+            else
+            {
+                escaneado = false;
+            }
+            DocumentoExpediente documento = new DocumentoExpediente(clave, escaneado);
             if(!documentos.contains(documento))
             {
                 documentos.add(documento);
-                //System.out.println(documento.getClave());
-                //System.out.println(documento.getObligatorio());
             }
         }
         return documentos;
@@ -104,7 +119,6 @@ public class AdministraScan {
     public void verificarexpedientes(){
         File f = new File(conf.carpetaCT); 
         ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
-        //System.out.println(cts);
         ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
         ArrayList<CentroTrabajo> centros_trabajo = this.getCTS(cts);
         for (String ct : cts) {
@@ -117,7 +131,6 @@ public class AdministraScan {
                 File dirDocumentos = new File(dirCT + "/" + exp);
                 ArrayList<String> docs = new ArrayList<String>(Arrays.asList(dirDocumentos.list()));
                 ExpedienteEmpleado expediente = new ExpedienteEmpleado(this.getDocumentos(docs), exp);
-                //System.out.println("Expediente: " + exp);
                 for (Empleado empleado : empleados)
                 {
                     if(empleado.getCURP().equals(expediente.getClave()))
@@ -134,43 +147,29 @@ public class AdministraScan {
             }
             for (CentroTrabajo centrot : centros_trabajo)
             {
-                System.out.println("Centro Trabajo: " + centrot.getClaveCT());
                 for (Empleado empleado : empleados)
                 {
-                    System.out.println("**************");
-                    System.out.println("Empleado: " + empleado.getCURP());
-                    //System.out.println("Clave CT " + empleado.getCTEmpleado().getClaveCT());
-                    System.out.println("**************");
-                    /*if (centrot.getClaveCT().equals(empleado.getCTEmpleado().getClaveCT()))
+                    if (centrot.getClaveCT().equals(empleado.getCTEmpleado().getClaveCT()))
                     {
                         centrot.addEmpleado(empleado);
-                    }*/
+                    }
                     
                 }
             }
-            for(Empleado empleado : empleados)
-            {
-                System.out.println("Empleado: " + empleado.getCURP());
-                System.out.println("Expediente: " + empleado.getExpediente().getClave());
-                System.out.println("# de documentos: " + empleado.getExpediente().getDocumentacion().size());
-            }
         }
-        /*for(Empleado empleado : empleados)
+        for(CentroTrabajo centrot : centros_trabajo)
         {
-            System.out.println("********************+");
-            System.out.println("Empleado: " + empleado.getCURP());
-            System.out.println("Expediente: " + empleado.getExpediente().getClave());
-            System.out.println("# de documentos: " + empleado.getExpediente().getDocumentacion().size());
-        }*/
-        /*for (CentroTrabajo centrot : centros_trabajo)
-        {
-            if(!centrot.getPantillaEmpleados().isEmpty()){
-                for (Empleado empleado : centrot.getPantillaEmpleados())
+            System.out.println("CT: " + centrot.getClaveCT());
+            for(Empleado empleado: centrot.getPantillaEmpleados())
+            {
+                System.out.println("Empleado " + empleado.getCURP());
+                for(DocumentoExpediente documento : empleado.getExpediente().getDocumentacion())
                 {
-                    System.out.println(empleado.getCURP());
-                    System.out.println("------------------");
+                    System.out.println("Documentos: " + documento.getClave());
+                    System.out.println("Documentos: " + this.DOCUMENTOS.get(documento.getClave()));
+                    System.out.println("Documentos: " + documento.getEscaneado());
                 }
             }
-        }*/
+        }
     }
 }
