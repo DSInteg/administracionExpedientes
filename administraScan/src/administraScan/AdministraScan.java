@@ -6,9 +6,16 @@
 package administraScan;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +24,7 @@ import java.util.HashMap;
 public class AdministraScan {
     private final Configuracion conf;
     HashMap<String, String> DOCUMENTOS;
+    private Connection connection;
     
     public AdministraScan(){
         this.conf = new Configuracion();
@@ -42,6 +50,61 @@ public class AdministraScan {
             }
         }
         return claves;
+    }
+    //Eli
+    
+    public void conectarbd()
+    {
+        
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(conf.DATABASE_URL, conf.USUARIO, conf.PASSWORD);
+            System.out.println("Conectado");
+        }
+        catch (ClassNotFoundException | SQLException sqlException)
+        {
+            sqlException.printStackTrace();
+        }
+    }
+    //aqui le empecé a mover
+    public ArrayList<SubSistema> getAllSubsistemas(){
+      //  ArrayList IDSub <String>= new ArrayList
+        ArrayList <SubSistema> subsistemas = new ArrayList<>(); 
+        String Nivel_Educativo ="";
+        ArrayList<String> IDSub=new ArrayList<>();
+        this.conectarbd();
+        String consultaSubsistemas="Select nivel_educativo from cg_nivel_educativo";
+        System.out.println(consultaSubsistemas);
+           
+        try {
+             PreparedStatement SPreparada;
+            SPreparada= connection.prepareStatement(consultaSubsistemas);
+            //SPreparada.setString(1,);
+               ResultSet resultadoSubsistemas=SPreparada.executeQuery();
+
+               if(resultadoSubsistemas.next()){
+                   Nivel_Educativo=resultadoSubsistemas.getString("nivel_educativo").trim();
+                   IDSub.add(Nivel_Educativo);
+                   System.out.println("Subsistema");
+               }
+
+               SPreparada.close();
+               connection.close(); 
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministraScan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+        for (String id : IDSub )
+        {
+            SubSistema sub =new SubSistema(id);
+            subsistemas.add(sub);
+        }
+            
+        return  subsistemas;        
+          
     }
 
     public ArrayList<SubSistema> getsubsistemas(ArrayList<String> cts)
@@ -116,11 +179,23 @@ public class AdministraScan {
         return documentos;
     }
     
-    public void verificarexpedientes(){
+    public ArrayList<SubSistema> verificarexpedientes(){
         File f = new File(conf.carpetaCT); 
         ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
         ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
         ArrayList<CentroTrabajo> centros_trabajo = this.getCTS(cts);
+        for(SubSistema sub : sub_sistemas)
+        {
+            for(CentroTrabajo ct : centros_trabajo)
+            {
+                String clave = ct.getClaveCT().substring(3, 5);
+                System.out.println(clave);
+                if(sub.getClaveSubSistema().equals(clave))
+                {
+                    sub.setCTSubsistema(ct);
+                }
+            }
+        }
         for (String ct : cts) {
             String dirCT = conf.carpetaCT + ct.trim();
             File dir_expedientes = new File(dirCT);
@@ -157,7 +232,7 @@ public class AdministraScan {
                 }
             }
         }
-        for(CentroTrabajo centrot : centros_trabajo)
+        /*for(CentroTrabajo centrot : centros_trabajo)
         {
             System.out.println("CT: " + centrot.getClaveCT());
             for(Empleado empleado: centrot.getPantillaEmpleados())
@@ -170,6 +245,7 @@ public class AdministraScan {
                     System.out.println("Documentos: " + documento.getEscaneado());
                 }
             }
-        }
+        }*/
+        return sub_sistemas;
     }
 }
