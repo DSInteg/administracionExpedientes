@@ -20,7 +20,6 @@ public class AdministraScan {
         this.conf = new Configuracion();
     }
     
-<<<<<<< HEAD
     public ArrayList<SubSistema> getsubsistemas(ArrayList<String> cts)
     {
         ArrayList<String> keys_subsis = new ArrayList<>();
