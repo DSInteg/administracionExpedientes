@@ -25,4 +25,19 @@ public class Empleado {
     {
         return this.CURP;
     }
+    
+    public ExpedienteEmpleado getExpediente()
+    {
+        return this.Expediente;
+    }
+    
+    public CentroTrabajo getCTEmpleado()
+    {
+        return this.CTEmpleado;
+    }
+    
+    public void setExpediente(ExpedienteEmpleado expediente)
+    {
+        this.Expediente = expediente;
+    }
 }

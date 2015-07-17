@@ -11,11 +11,13 @@ import java.util.ArrayList;
  * @author Juan
  */
 public class ExpedienteEmpleado {
+    private String Clave;
     private ArrayList<DocumentoExpediente> Documentacion;
     
-    public ExpedienteEmpleado(ArrayList<DocumentoExpediente> documentos)
+    public ExpedienteEmpleado(ArrayList<DocumentoExpediente> documentos, String clave)
     {
         this.Documentacion = documentos;
+        this.Clave = clave;
     }
     
     public ArrayList<DocumentoExpediente> getDocumentacion()
@@ -23,4 +25,8 @@ public class ExpedienteEmpleado {
         return this.Documentacion;
     }
     
+    public String getClave()
+    {
+        return this.Clave;
+    }
 }

@@ -18,10 +18,26 @@ public class DocumentoExpediente {
     
     public DocumentoExpediente(String clave)
     {
+        Configuracion conf = new Configuracion();
         this.Clave = clave;
+        if (conf.OBLIGATORIOS.contains(clave))
+        {
+            this.Obligatorio = true;
+        }
+        else
+        {
+            this.Obligatorio = false;
+        }
+        
     }
+    
     public String getClave()
     {
         return this.Clave;
+    }
+    
+    public Boolean getObligatorio()
+    {
+        return this.Obligatorio;
     }
 }
