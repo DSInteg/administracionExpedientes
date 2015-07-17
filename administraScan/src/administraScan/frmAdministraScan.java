@@ -40,21 +40,29 @@ public class frmAdministraScan extends javax.swing.JFrame {
         panelSubSistema = new javax.swing.JPanel();
         scrollSubSistema = new javax.swing.JScrollPane();
         listaSubSistema = new javax.swing.JList();
+        jLabel5 = new javax.swing.JLabel();
         panelCT = new javax.swing.JPanel();
         scrollCT = new javax.swing.JScrollPane();
         listaCT = new javax.swing.JList();
+        jLabel6 = new javax.swing.JLabel();
         panelCURP = new javax.swing.JPanel();
         scrollPlantilla = new javax.swing.JScrollPane();
         listaPlantilla = new javax.swing.JList();
+        jLabel7 = new javax.swing.JLabel();
         panelDocumentos = new javax.swing.JPanel();
         scrollDocumentos = new javax.swing.JScrollPane();
         listaDocumentos = new javax.swing.JList();
+        jLabel8 = new javax.swing.JLabel();
+        PanelDocumentosSecundarios = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelCabecera.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel1.setText("UNIDAD DE SERVICIOS EDUCATIVOS DE TLAXCALA");
 
         jLabel2.setText("ESCANEO DE EXPEDIENTES LABORALES");
@@ -126,7 +134,6 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
         panelSubSistema.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        listaSubSistema.setBackground(new java.awt.Color(240, 240, 240));
         listaSubSistema.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         listaSubSistema.setForeground(new java.awt.Color(255, 255, 255));
         listaSubSistema.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -138,11 +145,17 @@ public class frmAdministraScan extends javax.swing.JFrame {
         listaSubSistema.setVisibleRowCount(0);
         scrollSubSistema.setViewportView(listaSubSistema);
 
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
+        jLabel5.setText("Subsistema");
+
         javax.swing.GroupLayout panelSubSistemaLayout = new javax.swing.GroupLayout(panelSubSistema);
         panelSubSistema.setLayout(panelSubSistemaLayout);
         panelSubSistemaLayout.setHorizontalGroup(
             panelSubSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 217, Short.MAX_VALUE)
+            .addGroup(panelSubSistemaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(panelSubSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelSubSistemaLayout.createSequentialGroup()
                     .addGap(3, 3, 3)
@@ -151,11 +164,13 @@ public class frmAdministraScan extends javax.swing.JFrame {
         );
         panelSubSistemaLayout.setVerticalGroup(
             panelSubSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGroup(panelSubSistemaLayout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelSubSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelSubSistemaLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(scrollSubSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(34, 34, 34)
+                    .addComponent(scrollSubSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -172,11 +187,16 @@ public class frmAdministraScan extends javax.swing.JFrame {
         listaCT.setVisibleRowCount(0);
         scrollCT.setViewportView(listaCT);
 
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
+        jLabel6.setText("Centros de Trabajo");
+
         javax.swing.GroupLayout panelCTLayout = new javax.swing.GroupLayout(panelCT);
         panelCT.setLayout(panelCTLayout);
         panelCTLayout.setHorizontalGroup(
             panelCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 217, Short.MAX_VALUE)
+            .addGroup(panelCTLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
             .addGroup(panelCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelCTLayout.createSequentialGroup()
                     .addGap(3, 3, 3)
@@ -185,11 +205,13 @@ public class frmAdministraScan extends javax.swing.JFrame {
         );
         panelCTLayout.setVerticalGroup(
             panelCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelCTLayout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelCTLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(scrollCT, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(33, 33, 33)
+                    .addComponent(scrollCT, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -206,11 +228,16 @@ public class frmAdministraScan extends javax.swing.JFrame {
         listaPlantilla.setVisibleRowCount(0);
         scrollPlantilla.setViewportView(listaPlantilla);
 
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
+        jLabel7.setText("Empleados");
+
         javax.swing.GroupLayout panelCURPLayout = new javax.swing.GroupLayout(panelCURP);
         panelCURP.setLayout(panelCURPLayout);
         panelCURPLayout.setHorizontalGroup(
             panelCURPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 217, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCURPLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
             .addGroup(panelCURPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelCURPLayout.createSequentialGroup()
                     .addGap(3, 3, 3)
@@ -219,11 +246,13 @@ public class frmAdministraScan extends javax.swing.JFrame {
         );
         panelCURPLayout.setVerticalGroup(
             panelCURPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelCURPLayout.createSequentialGroup()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelCURPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelCURPLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(scrollPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(31, 31, 31)
+                    .addComponent(scrollPlantilla, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -240,25 +269,65 @@ public class frmAdministraScan extends javax.swing.JFrame {
         listaDocumentos.setVisibleRowCount(0);
         scrollDocumentos.setViewportView(listaDocumentos);
 
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
+        jLabel8.setText("Documentos Obligatorios");
+
         javax.swing.GroupLayout panelDocumentosLayout = new javax.swing.GroupLayout(panelDocumentos);
         panelDocumentos.setLayout(panelDocumentosLayout);
         panelDocumentosLayout.setHorizontalGroup(
             panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 217, Short.MAX_VALUE)
-            .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDocumentosLayout.createSequentialGroup()
-                    .addGap(3, 3, 3)
-                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGap(3, 3, 3)))
-        );
-        panelDocumentosLayout.setVerticalGroup(
-            panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelDocumentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDocumentosLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        panelDocumentosLayout.setVerticalGroup(
+            panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDocumentosLayout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 156, Short.MAX_VALUE))
+            .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDocumentosLayout.createSequentialGroup()
+                    .addContainerGap(31, Short.MAX_VALUE)
+                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
+        );
+
+        PanelDocumentosSecundarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jList1.setBackground(new java.awt.Color(240, 240, 240));
+        jList1.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
+        jLabel9.setText("Documentos Secundarios");
+
+        javax.swing.GroupLayout PanelDocumentosSecundariosLayout = new javax.swing.GroupLayout(PanelDocumentosSecundarios);
+        PanelDocumentosSecundarios.setLayout(PanelDocumentosSecundariosLayout);
+        PanelDocumentosSecundariosLayout.setHorizontalGroup(
+            PanelDocumentosSecundariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelDocumentosSecundariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelDocumentosSecundariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(PanelDocumentosSecundariosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        PanelDocumentosSecundariosLayout.setVerticalGroup(
+            PanelDocumentosSecundariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDocumentosSecundariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,7 +335,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -276,8 +345,10 @@ public class frmAdministraScan extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelCURP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelDocumentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelDocumentosSecundarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +360,10 @@ public class frmAdministraScan extends javax.swing.JFrame {
                     .addComponent(panelSubSistema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelCT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelCURP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelDocumentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelDocumentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(PanelDocumentosSecundarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -352,11 +426,19 @@ public class frmAdministraScan extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelDocumentosSecundarios;
     private java.awt.Button button1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listaCT;
     private javax.swing.JList listaDocumentos;
     private javax.swing.JList listaPlantilla;

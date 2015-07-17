@@ -38,5 +38,10 @@ public class CentroTrabajo {
         
         return PlantillaEmpleados;
     }
+    
+    public void addEmpleado(Empleado empleado)
+    {
+        this.PlantillaEmpleados.add(empleado);
+    }
 
 }

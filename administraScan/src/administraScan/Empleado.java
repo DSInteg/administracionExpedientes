@@ -59,7 +59,7 @@ public class Empleado {
         return this.CURP;
     }
     
-     public void obtenerDatosEmpleado(String curp){
+    public void obtenerDatosEmpleado(String curp){
         this.conectarbd();
         String consultaDatos="Select nombre, paterno, materno, ct from curp_rfc where curp =?";
         System.out.println(consultaDatos);
@@ -94,6 +94,18 @@ public class Empleado {
             
           
     }
+     public ExpedienteEmpleado getExpediente()
+    {
+        return this.Expediente;
+    }
     
+    public CentroTrabajo getCTEmpleado()
+    {
+        return this.CTEmpleado;
+    }
     
+    public void setExpediente(ExpedienteEmpleado expediente)
+    {
+        this.Expediente = expediente;
+    }
 }
