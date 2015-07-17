@@ -38,6 +38,8 @@ public class SubSistema {
     //lee de la base de datos todos los subsistemas
     public ArrayList<SubSistema> getAllSubSistema(){
         
+        
+        
         return null;
         
     }

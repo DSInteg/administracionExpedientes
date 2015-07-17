@@ -20,6 +20,7 @@ public class AdministraScan {
         this.conf = new Configuracion();
     }
     
+<<<<<<< HEAD
     public ArrayList<SubSistema> getsubsistemas(ArrayList<String> cts)
     {
         ArrayList<String> keys_subsis = new ArrayList<>();
@@ -87,6 +88,18 @@ public class AdministraScan {
         return documentos;
     }
     
+    public String RetornaCT(String nombre){
+        String str="";
+        StringBuffer cadena = new StringBuffer();                          
+        String[] parts_doc = nombre.split("_");
+        String [] extension_doc = parts_doc[parts_doc.length-1].split("\\.");
+        String [] resultado = extension_doc[extension_doc.length-2].split("");
+        cadena =cadena.append(extension_doc[extension_doc.length-2]);
+        str = cadena.toString();
+        System.out.println(str);
+        return str;
+    }
+    
     public void verificarexpedientes(){
         File f = new File(conf.carpetaCT); 
         ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
@@ -100,29 +113,31 @@ public class AdministraScan {
             File dir_expedientes = new File(dirCT);
             ArrayList<String> exp_temp = new ArrayList<String>(Arrays.asList(dir_expedientes.list()));
             ArrayList<Empleado> empleado = this.getEmpleados(exp_temp);
-            for (String exp : exp_temp){
+            for (String exp : exp_temp)
+            {
                 File dirDocumentos = new File(dirCT + "/" + exp);
                 ArrayList<String> docs = new ArrayList<String>(Arrays.asList(dirDocumentos.list()));
                 ExpedienteEmpleado expediente = new ExpedienteEmpleado(this.getDocumentos(docs));
                 System.out.println("Expediente: " + exp);
                 ArrayList<String> list_doc = new ArrayList<String>();
-                /*for (String documento : documentos){
-                    System.out.println(documento);
-                    String[] parts_doc = documento.split("_");
-                    System.out.println(parts_doc[1]);
-                    list_doc.add(parts_doc[1]);
-                }*/
+                for (String documento : docs){
+                    //System.out.println(documento);
+                    //String[] parts_doc = documento.split("_");
+                    //System.out.println(parts_doc[1]);
+                    //list_doc.add(parts_doc[1]);
+                    this.RetornaCT(documento);
+                }
                 /*for(String requerido : requeridos){
                     if (!list_doc.contains(requerido)){
                         expediente.faltantes.add(requerido);
                     }
-                }*/
+                }*
             }
             /*for (Expediente expediente : expedientes)
             {
-                System.out.println(expediente.curp);
+                //System.out.println(expediente.curp);
             }*/
-            
+            }
         }
     }
 }

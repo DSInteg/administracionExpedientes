@@ -128,7 +128,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
         listaSubSistema.setBackground(new java.awt.Color(240, 240, 240));
         listaSubSistema.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        listaSubSistema.setForeground(new java.awt.Color(102, 102, 102));
+        listaSubSistema.setForeground(new java.awt.Color(255, 255, 255));
         listaSubSistema.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaSubSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaSubSistema.setFocusable(false);
