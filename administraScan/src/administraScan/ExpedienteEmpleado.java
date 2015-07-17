@@ -13,4 +13,14 @@ import java.util.ArrayList;
 public class ExpedienteEmpleado {
     private ArrayList<DocumentoExpediente> Documentacion;
     
+    public ExpedienteEmpleado(ArrayList<DocumentoExpediente> documentos)
+    {
+        this.Documentacion = documentos;
+    }
+    
+    public ArrayList<DocumentoExpediente> getDocumentacion()
+    {
+        return this.Documentacion;
+    }
+    
 }

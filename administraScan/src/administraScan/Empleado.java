@@ -16,5 +16,13 @@ public class Empleado {
     private ExpedienteEmpleado Expediente;
     private CentroTrabajo  CTEmpleado;
     
+    public Empleado(String curp)
+    {
+        this.CURP = curp;
+    }
     
+    public String getCURP()
+    {
+        return this.CURP;
+    }
 }

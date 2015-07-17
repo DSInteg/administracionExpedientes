@@ -14,5 +14,14 @@ public class DocumentoExpediente {
     private Boolean Obligatorio;
     private Boolean Escaneado;
     private String Direccion;
+    private String Clave;
     
+    public DocumentoExpediente(String clave)
+    {
+        this.Clave = clave;
+    }
+    public String getClave()
+    {
+        return this.Clave;
+    }
 }

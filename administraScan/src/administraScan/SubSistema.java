@@ -21,6 +21,20 @@ public class SubSistema {
         this.claveSubSistema = clave;
     }
     
+    public String getClaveSubSistema(){
+        return this.claveSubSistema;
+    }
+    public String getNombreSubSistema(){
+        return this.nombreSubSistema;
+    }
+    
+    public void setClaveSubSistema(String clave){
+        this.claveSubSistema = clave;
+    }
+    public void getNombreSubSistema(String nombre){
+        this.nombreSubSistema = nombre;
+    }
+    
     //lee de la base de datos todos los subsistemas
     public ArrayList<SubSistema> getAllSubSistema(){
         

@@ -16,9 +16,15 @@ public class CentroTrabajo {
     
     public CentroTrabajo(String claveCT){
         this.claveCT=claveCT;
-        PlantillaEmpleados=obtenerPlantillaEmpleados();
+        //PlantillaEmpleados=obtenerPlantillaEmpleados();
         
     }
+    
+    public String getClaveCT()
+    {
+        return this.claveCT;
+    }
+    
     private ArrayList<Empleado> obtenerPlantillaEmpleados(){
         ArrayList<Empleado> plantilla = new ArrayList<Empleado>();
         return plantilla;
