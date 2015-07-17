@@ -14,7 +14,13 @@ import java.util.ArrayList;
 public class SubSistema {
     private String  claveSubSistema;
     private String  nombreSubSistema;
-    private ArrayList<CentroTrabajo> CentrosTrabajoSubsistema;  
+    private ArrayList<CentroTrabajo> CentrosTrabajoSubsistema;
+    
+    public SubSistema(String clave)
+    {
+        this.claveSubSistema = clave;
+    }
+    
     //lee de la base de datos todos los subsistemas
     public ArrayList<SubSistema> getAllSubSistema(){
         
