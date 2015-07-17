@@ -20,6 +20,18 @@ public class AdministraScan {
         this.conf = new Configuracion();
     }
     
+    public String RetornaCT(String nombre){
+        String str="";
+        StringBuffer cadena = new StringBuffer();                          
+        String[] parts_doc = nombre.split("_");
+        String [] extension_doc = parts_doc[parts_doc.length-1].split("\\.");
+        String [] resultado = extension_doc[extension_doc.length-2].split("");
+        cadena =cadena.append(extension_doc[extension_doc.length-2]);
+        str = cadena.toString();
+        //System.out.println(str);
+        return str;
+    }
+        
     public ArrayList<SubSistema> getsubsistemas(ArrayList<String> cts)
     {
         ArrayList<String> keys_subsis = new ArrayList<>();
@@ -77,7 +89,8 @@ public class AdministraScan {
         ArrayList<DocumentoExpediente> documentos = new ArrayList<>();
         for (String doc : docs)
         {
-            DocumentoExpediente documento = new DocumentoExpediente(doc);
+            String clave = this.RetornaCT(doc);
+            DocumentoExpediente documento = new DocumentoExpediente(clave);
             if(!documentos.contains(documento))
             {
                 documentos.add(documento);
@@ -86,24 +99,10 @@ public class AdministraScan {
         }
         return documentos;
     }
-    
-    public String RetornaCT(String nombre){
-        String str="";
-        StringBuffer cadena = new StringBuffer();                          
-        String[] parts_doc = nombre.split("_");
-        String [] extension_doc = parts_doc[parts_doc.length-1].split("\\.");
-        String [] resultado = extension_doc[extension_doc.length-2].split("");
-        cadena =cadena.append(extension_doc[extension_doc.length-2]);
-        str = cadena.toString();
-        System.out.println(str);
-        return str;
-    }
-    
+     
     public void verificarexpedientes(){
         File f = new File(conf.carpetaCT); 
         ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
-        String [] doc_r = {"IO", "RFC", "CURP", "AN", "CD","CAS", "CUGE"};
-        ArrayList<String> requeridos = new ArrayList<>(Arrays.asList(doc_r));
         System.out.println(cts);
         ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
         ArrayList<CentroTrabajo> centros_trabajo = this.getCTS(cts);
@@ -120,10 +119,6 @@ public class AdministraScan {
                 System.out.println("Expediente: " + exp);
                 ArrayList<String> list_doc = new ArrayList<String>();
                 for (String documento : docs){
-                    //System.out.println(documento);
-                    //String[] parts_doc = documento.split("_");
-                    //System.out.println(parts_doc[1]);
-                    //list_doc.add(parts_doc[1]);
                     this.RetornaCT(documento);
                 }
                 /*for(String requerido : requeridos){
