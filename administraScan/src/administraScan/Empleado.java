@@ -108,4 +108,9 @@ public class Empleado {
     {
         this.Expediente = expediente;
     }
+    
+    public String getNombreCompleto()
+    {
+        return this.Nombre + " " + this.Paterno + " " + this.Materno;
+    }
 }

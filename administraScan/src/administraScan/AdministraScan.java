@@ -170,7 +170,8 @@ public class AdministraScan {
             {
                 escaneado = false;
             }
-            DocumentoExpediente documento = new DocumentoExpediente(clave, escaneado);
+            String nombre = this.DOCUMENTOS.get(clave);
+            DocumentoExpediente documento = new DocumentoExpediente(clave, nombre, escaneado);
             if(!documentos.contains(documento))
             {
                 documentos.add(documento);
@@ -246,6 +247,31 @@ public class AdministraScan {
                 }
             }
         }*/
+        for (SubSistema subsis : sub_sistemas)
+        {
+            //ArrayList<CentroTrabajo> ct = ;
+            System.out.println("*************************************");
+            System.out.println(subsis.getNombreSubSistema());
+            for(CentroTrabajo ct : subsis.getCentrosTrabajoSubsistema())
+            {
+                System.out.println(ct.getClaveCT());
+                for(Empleado empleado : ct.getPantillaEmpleados())
+                {
+                    System.out.println(empleado.getNombreCompleto());
+                    System.out.println("\nDocumentos Obligatorios:\n");
+                    for(DocumentoExpediente documento : empleado.getExpediente().getObligatorios())
+                    {
+                        System.out.println(documento.getNombre() + " " + documento.getEscaneado());
+                    }
+                    System.out.println("\nDocumentos Opcionales:\n");
+                    for(DocumentoExpediente documento : empleado.getExpediente().getOpcionales())
+                    {
+                        System.out.println(documento.getNombre() + " " + documento.getEscaneado());
+                    }
+                    System.out.println("----------------------------------");
+                }
+            }
+        }
         return sub_sistemas;
     }
 }

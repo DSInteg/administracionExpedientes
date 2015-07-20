@@ -96,4 +96,8 @@ public class SubSistema {
         this.CentrosTrabajoSubsistema.add(CT);
     }
     
+    public ArrayList<CentroTrabajo> getCentrosTrabajoSubsistema()
+    {
+        return this.CentrosTrabajoSubsistema;
+    }
 }
