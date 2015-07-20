@@ -29,4 +29,34 @@ public class ExpedienteEmpleado {
     {
         return this.Clave;
     }
+    
+    public ArrayList<DocumentoExpediente> getObligatorios()
+    {
+        Configuracion conf = new Configuracion();
+        ArrayList<DocumentoExpediente> obligatorios = new ArrayList<>();
+        ArrayList<DocumentoExpediente> documentos = this.getDocumentacion();
+        for(DocumentoExpediente documento : documentos)
+        {
+            if(conf.OBLIGATORIOS.contains(documento.getClave()))
+            {
+                obligatorios.add(documento);
+            }
+        }
+        return obligatorios;
+    }
+    
+    public ArrayList<DocumentoExpediente> getOpcionales()
+    {
+        Configuracion conf = new Configuracion();
+        ArrayList<DocumentoExpediente> opcionales = new ArrayList<>();
+        ArrayList<DocumentoExpediente> documentos = this.getDocumentacion();
+        for(DocumentoExpediente documento : documentos)
+        {
+            if(!conf.OBLIGATORIOS.contains(documento.getClave()))
+            {
+                opcionales.add(documento);
+            }
+        }
+        return opcionales;
+    }
 }
