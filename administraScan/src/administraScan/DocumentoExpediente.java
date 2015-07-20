@@ -4,6 +4,10 @@
  */
 package administraScan;
 
+import java.awt.Color;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Juan
@@ -14,6 +18,7 @@ public class DocumentoExpediente {
     private Boolean Escaneado;
     private String Direccion;
     private String Clave;
+    
     
     public DocumentoExpediente(String clave, String nombre, Boolean escaneado)
     {
@@ -28,8 +33,9 @@ public class DocumentoExpediente {
         {
             this.Obligatorio = false;
         }
-        this.Escaneado = escaneado;
         
+        this.Escaneado = escaneado;
+       
     }
     
     public String getClave()

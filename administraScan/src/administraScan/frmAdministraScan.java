@@ -1,5 +1,11 @@
 package administraScan;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,13 +16,25 @@ package administraScan;
  * @author Juan
  */
 public class frmAdministraScan extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form frmAdministraScan
      */
+    private Dimension dim;
+    SubsistemaListModel dlm;
+    CentroTrabajoListModel dlmct;
+    EmpleadoListModel dlmemp;
+    DocumentoExpedienteListModel dlmdocob;
+    DocumentoExpedienteListModel dlmdocop;
+    
     public frmAdministraScan() {
         initComponents();
-        visualizaSubSistemas();
+        dlm = new SubsistemaListModel();
+        dlmct = new CentroTrabajoListModel();
+        dlmemp = new EmpleadoListModel();
+        dlmdocob = new DocumentoExpedienteListModel();
+        dlmdocop = new DocumentoExpedienteListModel();
+                
         
     }
 
@@ -28,6 +46,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         panelCabecera = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -55,7 +74,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         PanelDocumentosSecundarios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listaDocumentosOp = new javax.swing.JList();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,7 +127,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
                             .addGroup(panelCabeceraLayout.createSequentialGroup()
                                 .addGap(282, 282, 282)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 347, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelCabeceraLayout.setVerticalGroup(
@@ -135,14 +154,27 @@ public class frmAdministraScan extends javax.swing.JFrame {
         panelSubSistema.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         listaSubSistema.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        listaSubSistema.setForeground(new java.awt.Color(255, 255, 255));
         listaSubSistema.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaSubSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        listaSubSistema.setFocusable(false);
         listaSubSistema.setRequestFocusEnabled(false);
         listaSubSistema.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        listaSubSistema.setValueIsAdjusting(true);
         listaSubSistema.setVerifyInputWhenFocusTarget(false);
         listaSubSistema.setVisibleRowCount(0);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaSubSistema, org.jdesktop.beansbinding.ELProperty.create("${firstVisibleIndex}"), listaSubSistema, org.jdesktop.beansbinding.BeanProperty.create("focusable"));
+        bindingGroup.addBinding(binding);
+
+        listaSubSistema.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                listaSubSistemaFocusLost(evt);
+            }
+        });
+        listaSubSistema.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaSubSistemaMouseClicked(evt);
+            }
+        });
         scrollSubSistema.setViewportView(listaSubSistema);
 
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
@@ -170,21 +202,24 @@ public class frmAdministraScan extends javax.swing.JFrame {
             .addGroup(panelSubSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelSubSistemaLayout.createSequentialGroup()
                     .addGap(34, 34, 34)
-                    .addComponent(scrollSubSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(scrollSubSistema, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         panelCT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        listaCT.setBackground(new java.awt.Color(240, 240, 240));
         listaCT.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        listaCT.setForeground(new java.awt.Color(102, 102, 102));
         listaCT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaCT.setFocusable(false);
         listaCT.setRequestFocusEnabled(false);
         listaCT.setSelectionBackground(new java.awt.Color(153, 153, 153));
         listaCT.setVerifyInputWhenFocusTarget(false);
         listaCT.setVisibleRowCount(0);
+        listaCT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaCTMouseClicked(evt);
+            }
+        });
         scrollCT.setViewportView(listaCT);
 
         jLabel6.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
@@ -217,15 +252,18 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
         panelCURP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        listaPlantilla.setBackground(new java.awt.Color(240, 240, 240));
         listaPlantilla.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        listaPlantilla.setForeground(new java.awt.Color(102, 102, 102));
         listaPlantilla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaPlantilla.setFocusable(false);
         listaPlantilla.setRequestFocusEnabled(false);
         listaPlantilla.setSelectionBackground(new java.awt.Color(153, 153, 153));
         listaPlantilla.setVerifyInputWhenFocusTarget(false);
         listaPlantilla.setVisibleRowCount(0);
+        listaPlantilla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaPlantillaMouseClicked(evt);
+            }
+        });
         scrollPlantilla.setViewportView(listaPlantilla);
 
         jLabel7.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
@@ -258,9 +296,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
         panelDocumentos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        listaDocumentos.setBackground(new java.awt.Color(240, 240, 240));
         listaDocumentos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        listaDocumentos.setForeground(new java.awt.Color(102, 102, 102));
         listaDocumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         listaDocumentos.setFocusable(false);
         listaDocumentos.setRequestFocusEnabled(false);
@@ -278,31 +314,29 @@ public class frmAdministraScan extends javax.swing.JFrame {
             panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDocumentosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDocumentosLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panelDocumentosLayout.setVerticalGroup(
             panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDocumentosLayout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 156, Short.MAX_VALUE))
+                .addGap(0, 185, Short.MAX_VALUE))
             .addGroup(panelDocumentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDocumentosLayout.createSequentialGroup()
                     .addContainerGap(31, Short.MAX_VALUE)
-                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollDocumentos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 
         PanelDocumentosSecundarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jList1.setBackground(new java.awt.Color(240, 240, 240));
-        jList1.setSelectionBackground(new java.awt.Color(153, 153, 153));
-        jScrollPane1.setViewportView(jList1);
+        listaDocumentosOp.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setViewportView(listaDocumentosOp);
 
         jLabel9.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
         jLabel9.setText("Documentos Secundarios");
@@ -314,10 +348,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
             .addGroup(PanelDocumentosSecundariosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelDocumentosSecundariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(PanelDocumentosSecundariosLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 3, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelDocumentosSecundariosLayout.setVerticalGroup(
@@ -326,7 +358,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -334,10 +366,10 @@ public class frmAdministraScan extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelSubSistema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -347,8 +379,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelDocumentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PanelDocumentosSecundarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(10, 10, 10))))
+                            .addComponent(PanelDocumentosSecundarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,10 +394,12 @@ public class frmAdministraScan extends javax.swing.JFrame {
                     .addComponent(panelCURP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panelDocumentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PanelDocumentosSecundarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelDocumentosSecundarios, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -376,19 +410,110 @@ public class frmAdministraScan extends javax.swing.JFrame {
         OrganizaDirectorios obj=new OrganizaDirectorios();
         obj.clasificar();
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void listaSubSistemaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listaSubSistemaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaSubSistemaFocusLost
+
+    private void listaSubSistemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaSubSistemaMouseClicked
+        // TODO add your handling code here:
+        SubSistema sub = this.dlm.getSubsistema(this.listaSubSistema.getSelectedIndex());
+        this.dlmct.limpiar();
+        this.dlmemp.limpiar();
+        this.dlmdocob.limpiar();
+        this.dlmdocop.limpiar();
+        this.listaCT.removeAll();
+        this.listaPlantilla.removeAll();
+        this.listaDocumentos.removeAll();
+        this.listaDocumentosOp.removeAll();
+        this.listaCT.repaint();
+        this.listaPlantilla.repaint();
+        this.listaDocumentos.repaint();
+        this.listaDocumentosOp.repaint();
+        this.visualizaCTSubSistema(sub.getCentrosTrabajoSubsistema());
+               // this.listaSubSistema.getSelectedIndex()
+        
+        
+    }//GEN-LAST:event_listaSubSistemaMouseClicked
+
+    private void listaCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCTMouseClicked
+        CentroTrabajo cen = this.dlmct.getCentroTrabajo(this.listaCT.getSelectedIndex());
+        this.dlmemp.limpiar();
+        this.dlmdocob.limpiar();
+        this.dlmdocop.limpiar();
+        this.listaPlantilla.removeAll();
+        this.listaDocumentos.removeAll();
+        this.listaDocumentosOp.removeAll();
+        this.listaPlantilla.repaint();
+        this.listaDocumentos.repaint();
+        this.listaDocumentosOp.repaint();
+        this.visualizaEmpleados(cen.getPantillaEmpleados());
+    }//GEN-LAST:event_listaCTMouseClicked
+
+    private void listaPlantillaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPlantillaMouseClicked
+        Empleado em = this.dlmemp.getEmpleado(this.listaPlantilla.getSelectedIndex());
+        this.dlmdocob.limpiar();
+        this.dlmdocop.limpiar();
+        this.listaDocumentos.removeAll();
+        this.listaDocumentosOp.removeAll();
+        this.listaDocumentos.repaint();
+        this.listaDocumentosOp.repaint();
+        this.visualizaDocumentos(em.getExpediente());
+    }//GEN-LAST:event_listaPlantillaMouseClicked
     //debe de pintar en el JList listaSubSistema los subsistemas
-   public void visualizaSubSistemas(){
-    
+   public void visualizaSubSistemas(ArrayList<SubSistema> arreglosubs){    
+       listaSubSistema.removeAll(); 
+       for (SubSistema arreglosub : arreglosubs) {
+            dlm.addSubsistema(arreglosub);
+        }
+         for (int i=0; i<dlm.getSize();i++){
+            System.out.println(dlm.getElementAt(i));
+         }
+        System.out.println("_________________");
+        System.out.println(" "+dlm.getSize());
+
+        listaSubSistema.setModel(dlm);
 }
    //pinta en el JList listaCT la clave de todos los CT del subsistemas
-   public void visualizaCTSubSistema(){
-       
-   }
+   public void visualizaCTSubSistema(ArrayList<CentroTrabajo> cts){
+       listaCT.removeAll();
+       for (CentroTrabajo ct : cts) {
+            dlmct.addCentroTrabajo(ct);
+        }   
+    listaCT.setModel(dlmct);
+       }
    
    //pinta en el Jlist listaPlantilla la clave CURP de los empleados de ese CT
-   public void visualizaPlantillaCT(){
-       
+   public void visualizaEmpleados(ArrayList<Empleado> emps){
+       listaPlantilla.removeAll();
+       for(Empleado emp: emps){
+           dlmemp.addEmpleado(emp);
+       }
+       listaPlantilla.setModel(dlmemp);
    }
+   
+   public void visualizaDocumentos(ExpedienteEmpleado docs)
+   {
+       RenderListaDocumento rl = new RenderListaDocumento();
+       listaDocumentos.removeAll();
+       listaDocumentosOp.removeAll();
+       for(DocumentoExpediente doc: docs.getObligatorios())
+       {
+           dlmdocob.addDocumentoExpediente(doc);
+       }
+       listaDocumentos.setModel(dlmdocob);
+       listaDocumentos.setCellRenderer(rl);
+       
+       for(DocumentoExpediente doc: docs.getOpcionales())
+       {
+           dlmdocop.addDocumentoExpediente(doc);
+           
+       }
+       listaDocumentosOp.setModel(dlmdocop);
+       listaDocumentosOp.setCellRenderer(rl);
+   
+   }
+   
     /**
      * @param args the command line arguments
      */
@@ -415,12 +540,15 @@ public class frmAdministraScan extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmAdministraScan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        AdministraScan obj = new AdministraScan();
-        obj.verificarexpedientes();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmAdministraScan().setVisible(true);
+                AdministraScan obj = new AdministraScan();
+                frmAdministraScan adm =new frmAdministraScan();
+                adm.setVisible(true);
+                
+                adm.visualizaSubSistemas(obj.verificarexpedientes());
+                adm.repaint();
             }
         });
     }
@@ -437,10 +565,10 @@ public class frmAdministraScan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listaCT;
     private javax.swing.JList listaDocumentos;
+    private javax.swing.JList listaDocumentosOp;
     private javax.swing.JList listaPlantilla;
     private javax.swing.JList listaSubSistema;
     private javax.swing.JPanel panelCT;
@@ -454,5 +582,6 @@ public class frmAdministraScan extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollSubSistema;
     private javax.swing.JLabel txtExpedientesCompletos;
     private javax.swing.JLabel txtExpedientesEscaneados;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
