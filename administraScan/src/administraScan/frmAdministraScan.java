@@ -406,9 +406,24 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-        
+        AdministraScan adm_scan = new AdministraScan();
         OrganizaDirectorios obj=new OrganizaDirectorios();
         obj.clasificar();
+        this.dlm.limpiar();
+        this.dlmct.limpiar();
+        this.dlmemp.limpiar();
+        this.dlmdocob.limpiar();
+        this.dlmdocop.limpiar();
+        this.listaCT.removeAll();
+        this.listaPlantilla.removeAll();
+        this.listaDocumentos.removeAll();
+        this.listaDocumentosOp.removeAll();
+        this.listaCT.repaint();
+        this.listaPlantilla.repaint();
+        this.listaDocumentos.repaint();
+        this.listaDocumentosOp.repaint();
+        this.visualizaSubSistemas(adm_scan.verificarexpedientes());
+        
     }//GEN-LAST:event_button1ActionPerformed
 
     private void listaSubSistemaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listaSubSistemaFocusLost
@@ -546,7 +561,6 @@ public class frmAdministraScan extends javax.swing.JFrame {
                 AdministraScan obj = new AdministraScan();
                 frmAdministraScan adm =new frmAdministraScan();
                 adm.setVisible(true);
-                
                 adm.visualizaSubSistemas(obj.verificarexpedientes());
                 adm.repaint();
             }

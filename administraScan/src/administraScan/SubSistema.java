@@ -49,15 +49,17 @@ public class SubSistema {
     private void getDatosSubsistema(String clave){
         String Id = "";
         this.conectarbd();
-        String consultaDescripcionSS="Select descripcion from cg_nivel_educativo";
+        String consultaDescripcionSS="Select descripcion from cg_nivel_educativo where nivel_educativo = ?";
         System.out.println(consultaDescripcionSS);
         try {
             PreparedStatement SPreparada;
             SPreparada= connection.prepareStatement(consultaDescripcionSS);
-            //SPreparada.setString(1,clave);
+            SPreparada.setString(1,clave);
             ResultSet resultadoDescripcion=SPreparada.executeQuery();
             if(resultadoDescripcion.next()){
                 Id=resultadoDescripcion.getString("descripcion").trim();
+                System.out.println(clave);
+                System.out.println(Id);
             }            
         SPreparada.close();
         connection.close(); 
