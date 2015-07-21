@@ -46,7 +46,6 @@ public class frmAdministraScan extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         panelCabecera = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -161,10 +160,6 @@ public class frmAdministraScan extends javax.swing.JFrame {
         listaSubSistema.setValueIsAdjusting(true);
         listaSubSistema.setVerifyInputWhenFocusTarget(false);
         listaSubSistema.setVisibleRowCount(0);
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaSubSistema, org.jdesktop.beansbinding.ELProperty.create("${firstVisibleIndex}"), listaSubSistema, org.jdesktop.beansbinding.BeanProperty.create("focusable"));
-        bindingGroup.addBinding(binding);
-
         listaSubSistema.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 listaSubSistemaFocusLost(evt);
@@ -399,8 +394,6 @@ public class frmAdministraScan extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bindingGroup.bind();
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -596,6 +589,5 @@ public class frmAdministraScan extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollSubSistema;
     private javax.swing.JLabel txtExpedientesCompletos;
     private javax.swing.JLabel txtExpedientesEscaneados;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

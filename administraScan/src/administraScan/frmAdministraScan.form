@@ -254,9 +254,6 @@
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                 <Property name="visibleRowCount" type="int" value="0"/>
               </Properties>
-              <BindingProperties>
-                <BindingProperty name="focusable" source="listaSubSistema" sourcePath="${firstVisibleIndex}" target="listaSubSistema" targetPath="focusable" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="listaSubSistemaFocusLost"/>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listaSubSistemaMouseClicked"/>
