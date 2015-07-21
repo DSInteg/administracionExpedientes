@@ -21,7 +21,7 @@ public class Configuracion {
     final String USUARIO="curp";
     final String PASSWORD="curpuset";
     final String DATABASE_URL="jdbc:mysql://127.0.0.1/curp_uset";
-    private String [] DOC_R = {"IO", "RFC", "CURP", "AN", "CD",/*"CAS,*/ "CUGE"};
+    private String [] DOC_R = {"IO", "RFC", "CURP", "AN", "CD", "CAS", "CUGE"};
     final ArrayList<String> OBLIGATORIOS = new ArrayList<>(Arrays.asList(DOC_R));
     final String [] NOMBRES_DOC = {"Identificacion Oficial", "RFC", "CURP",
         "Acta de Nacimiento", "Cartilla Militar", "Carta de Naturalizacion",

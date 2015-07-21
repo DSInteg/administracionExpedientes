@@ -23,7 +23,7 @@ public class EmpleadoListModel extends AbstractListModel{
     @Override
     public Object getElementAt(int index) {
         Empleado e = lista.get(index);
-        return e.getNombreCompleto();
+        return e.getCURP();
     }
     
     public void addEmpleado(Empleado e){

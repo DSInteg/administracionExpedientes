@@ -437,6 +437,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
     private void listaSubSistemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaSubSistemaMouseClicked
         // TODO add your handling code here:
         SubSistema sub = this.dlm.getSubsistema(this.listaSubSistema.getSelectedIndex());
+        AdministraScan obj = new AdministraScan();
+        ArrayList<CentroTrabajo> cts = obj.getCTSfromSubsistema(sub);
         this.dlmct.limpiar();
         this.dlmemp.limpiar();
         this.dlmdocob.limpiar();
@@ -449,7 +451,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
         this.listaPlantilla.repaint();
         this.listaDocumentos.repaint();
         this.listaDocumentosOp.repaint();
-        this.visualizaCTSubSistema(sub.getCentrosTrabajoSubsistema());
+        this.visualizaCTSubSistema(cts);
                // this.listaSubSistema.getSelectedIndex()
         
         
@@ -457,6 +459,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
 
     private void listaCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCTMouseClicked
         CentroTrabajo cen = this.dlmct.getCentroTrabajo(this.listaCT.getSelectedIndex());
+        AdministraScan obj = new AdministraScan();
         this.dlmemp.limpiar();
         this.dlmdocob.limpiar();
         this.dlmdocop.limpiar();
@@ -466,24 +469,25 @@ public class frmAdministraScan extends javax.swing.JFrame {
         this.listaPlantilla.repaint();
         this.listaDocumentos.repaint();
         this.listaDocumentosOp.repaint();
-        this.visualizaEmpleados(cen.getPantillaEmpleados());
+        this.visualizaEmpleados(obj.getEmpleadosfromCT(cen));
     }//GEN-LAST:event_listaCTMouseClicked
 
     private void listaPlantillaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPlantillaMouseClicked
         Empleado em = this.dlmemp.getEmpleado(this.listaPlantilla.getSelectedIndex());
+        AdministraScan obj = new AdministraScan();
         this.dlmdocob.limpiar();
         this.dlmdocop.limpiar();
         this.listaDocumentos.removeAll();
         this.listaDocumentosOp.removeAll();
         this.listaDocumentos.repaint();
         this.listaDocumentosOp.repaint();
-        this.visualizaDocumentos(em.getExpediente());
+        this.visualizaDocumentos(obj.getDocumentosfromEmpleado(em));
     }//GEN-LAST:event_listaPlantillaMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         AdministraScan adm_scan = new AdministraScan();
-        adm_scan.verificarexpedientes();
+        adm_scan.generarcsv();
     }//GEN-LAST:event_jButton1ActionPerformed
     //debe de pintar en el JList listaSubSistema los subsistemas
    public void visualizaSubSistemas(ArrayList<SubSistema> arreglosubs){    
@@ -491,11 +495,11 @@ public class frmAdministraScan extends javax.swing.JFrame {
        for (SubSistema arreglosub : arreglosubs) {
             dlm.addSubsistema(arreglosub);
         }
-         for (int i=0; i<dlm.getSize();i++){
+         /*for (int i=0; i<dlm.getSize();i++){
             System.out.println(dlm.getElementAt(i));
-         }
-        System.out.println("_________________");
-        System.out.println(" "+dlm.getSize());
+         }*/
+        /*System.out.println("_________________");
+        System.out.println(" "+dlm.getSize());*/
 
         listaSubSistema.setModel(dlm);
 }
@@ -571,7 +575,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
                 AdministraScan obj = new AdministraScan();
                 frmAdministraScan adm =new frmAdministraScan();
                 adm.setVisible(true);
-                //adm.visualizaSubSistemas(obj.verificarexpedientes());
+                adm.visualizaSubSistemas(obj.verificarexpedientes());
                 adm.repaint();
             }
         });

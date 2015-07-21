@@ -31,7 +31,7 @@ public class SubSistema {
         {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(conf.DATABASE_URL, conf.USUARIO, conf.PASSWORD);
-            System.out.println("Conectado");
+            //System.out.println("Conectado");
         }
         catch (ClassNotFoundException | SQLException sqlException)
         {
@@ -50,7 +50,7 @@ public class SubSistema {
         String Id = "";
         this.conectarbd();
         String consultaDescripcionSS="Select descripcion from cg_nivel_educativo where nivel_educativo = ?";
-        System.out.println(consultaDescripcionSS);
+        //System.out.println(consultaDescripcionSS);
         try {
             PreparedStatement SPreparada;
             SPreparada= connection.prepareStatement(consultaDescripcionSS);
@@ -58,8 +58,8 @@ public class SubSistema {
             ResultSet resultadoDescripcion=SPreparada.executeQuery();
             if(resultadoDescripcion.next()){
                 Id=resultadoDescripcion.getString("descripcion").trim();
-                System.out.println(clave);
-                System.out.println(Id);
+                //System.out.println(clave);
+                //System.out.println(Id);
             }            
         SPreparada.close();
         connection.close(); 

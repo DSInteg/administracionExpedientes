@@ -131,6 +131,53 @@ public class AdministraScan {
         return subsistemas;
     }
     
+    public ArrayList<CentroTrabajo> getCTSfromSubsistema(SubSistema subsistema)
+    {
+        File f = new File(conf.carpetaCT); 
+        ArrayList<String> list_cts = new ArrayList<>(Arrays.asList(f.list()));
+        ArrayList<CentroTrabajo> cts = new ArrayList<>();
+        for(String ct : list_cts)
+        {
+            String clave = ct.substring(3, 5);
+            //System.out.println(clave);
+            if(subsistema.getClaveSubSistema().equals(clave))
+            {
+                CentroTrabajo ct_obj = new CentroTrabajo(ct);
+                subsistema.setCTSubsistema(ct_obj);
+                cts.add(ct_obj);
+            }
+        }
+        return cts;
+    }
+    
+    public ArrayList<Empleado> getEmpleadosfromCT(CentroTrabajo ct)
+    {
+        String curp = "";
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        this.conectarbd();
+        String consultaDatos = "Select curp from curp_rfc where ct =? order by curp";
+        //System.out.println("***********************");
+        //System.out.println(consultaDatos);
+        //System.out.println(ct.getClaveCT());
+        try {
+            PreparedStatement SPreparada;
+            SPreparada= connection.prepareStatement(consultaDatos);
+            SPreparada.setString(1, ct.getClaveCT());
+            ResultSet resultadoDatosEmpleado=SPreparada.executeQuery();
+            while(resultadoDatosEmpleado.next()){
+                curp=resultadoDatosEmpleado.getString("curp").trim();
+                Empleado empleado = new Empleado(curp);
+                empleados.add(empleado);
+            }
+            //System.out.println("***********************");
+            SPreparada.close();
+            connection.close(); 
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empleados;
+    }
+    
     public ArrayList<CentroTrabajo> getCTS(ArrayList<String> array_cts)
     {
         ArrayList<CentroTrabajo> cts = new ArrayList<>();
@@ -183,7 +230,32 @@ public class AdministraScan {
         return documentos;
     }
     
-    public void generarcsv(ArrayList<String> cts){
+    public ExpedienteEmpleado getDocumentosfromEmpleado(Empleado empleado)
+    {
+        File f = new File(conf.carpetaCT);
+        ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
+        ArrayList<String> documentos = new ArrayList<>();
+        String clave = "";
+        ExpedienteEmpleado expediente;
+        for(String ct : cts){
+            String dirCT = conf.carpetaCT + ct.trim();
+            File dir_expedientes = new File(dirCT);
+            ArrayList<String> curps = new ArrayList<>(Arrays.asList(dir_expedientes.list()));
+            for(String curp : curps){
+                String dircurp = dirCT + "\\" + curp.trim();
+                if(curp.equals(empleado.getCURP()))
+                {
+                    File doc = new File(dircurp);
+                    documentos = new ArrayList<>(Arrays.asList(doc.list()));
+                    clave = curp;
+                }
+            }
+        }
+        expediente = new ExpedienteEmpleado(this.getDocumentos(documentos), clave);
+        return expediente;
+    }
+    
+    public void generarcsv(){
         FileWriter fichero = null;
         PrintWriter pw = null;
         String centrotrabajo = "";
@@ -195,6 +267,8 @@ public class AdministraScan {
             fichero = new FileWriter(conf.carpetaRemota + "reporte_estado_expedientes.csv");
             pw = new PrintWriter(fichero);
             pw.println("Centro de Trabajo,CURP,Estado Expediente");
+            File f = new File(conf.carpetaCT);
+            ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
             for(String ct : cts){
                 String dirCT = conf.carpetaCT + ct.trim();
                 File dir_expedientes = new File(dirCT);
@@ -210,11 +284,13 @@ public class AdministraScan {
                     ArrayList<String> temporal = new ArrayList<>();
                     System.out.println(curp);
                     for(String clave: claves){
-                        if(conf.OBLIGATORIOS.contains(clave)){
-                            temporal.add(clave);
+                        if (!clave.equals("CAS")){
+                            if(conf.OBLIGATORIOS.contains(clave)){
+                                temporal.add(clave);
+                            }
                         }
                     }
-                    if(temporal.size() != conf.OBLIGATORIOS.size()){
+                    if(temporal.size() != conf.OBLIGATORIOS.size()-1){
                         completo = "Incompleto";
                     }
                     pw.println(centrotrabajo + "," + curp1 + "," + completo);
@@ -239,9 +315,9 @@ public class AdministraScan {
     public ArrayList<SubSistema> verificarexpedientes(){
         File f = new File(conf.carpetaCT); 
         ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
-        this.generarcsv(cts);
-        /*ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
-        ArrayList<CentroTrabajo> centros_trabajo = this.getCTS(cts);
+        //this.generarcsv(cts);
+        ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
+        /*ArrayList<CentroTrabajo> centros_trabajo = this.getCTS(cts);
         for(SubSistema sub : sub_sistemas)
         {
             for(CentroTrabajo ct : centros_trabajo)
@@ -271,13 +347,7 @@ public class AdministraScan {
                         empleado.setExpediente(expediente);
                     }
                 }
-                //ArrayList<String> list_doc = new ArrayList<String>();
-                /*for(String requerido : requeridos){
-                    if (!list_doc.contains(requerido)){
-                        expediente.faltantes.add(requerido);
-                    }
-                }*/
-            /*}
+            }
             for (CentroTrabajo centrot : centros_trabajo)
             {
                 for (Empleado empleado : empleados)
@@ -290,7 +360,7 @@ public class AdministraScan {
                 }
             }
         }
-        /*for(CentroTrabajo centrot : centros_trabajo)
+        for(CentroTrabajo centrot : centros_trabajo)
         {
             System.out.println("CT: " + centrot.getClaveCT());
             for(Empleado empleado: centrot.getPantillaEmpleados())
@@ -328,8 +398,8 @@ public class AdministraScan {
                     System.out.println("----------------------------------");
                 }
             }
-        }
-        return sub_sistemas;*/
-        return null;
+        }*/
+        return sub_sistemas;
+        //return null;
     }
 }
