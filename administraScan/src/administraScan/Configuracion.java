@@ -14,12 +14,14 @@ public class Configuracion {
     //Carpetas
     final String carpetaRemota="c:\\escaneos\\";
     final String carpetaCT = this.carpetaRemota + "aceptadosCT\\";
+    //final String carpetaRemota="/home/enriquedg/Desktop/dsinteg/escaneos/";
+    //final String carpetaCT = this.carpetaRemota + "aceptadosCT/";
     //final String carpetaLocal="/home/eli-vaio/Desktop/dsinteg/escaneos/";
     //Base de Datos local
     final String USUARIO="curp";
     final String PASSWORD="curpuset";
     final String DATABASE_URL="jdbc:mysql://127.0.0.1/curp_uset";
-    private String [] DOC_R = {"IO", "RFC", "CURP", "AN", "CD","CAS", "CUGE"};
+    private String [] DOC_R = {"IO", "RFC", "CURP", "AN", "CD",/*"CAS,*/ "CUGE"};
     final ArrayList<String> OBLIGATORIOS = new ArrayList<>(Arrays.asList(DOC_R));
     final String [] NOMBRES_DOC = {"Identificacion Oficial", "RFC", "CURP",
         "Acta de Nacimiento", "Cartilla Militar", "Carta de Naturalizacion",

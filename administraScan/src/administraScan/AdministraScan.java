@@ -6,6 +6,8 @@
 package administraScan;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -180,10 +183,64 @@ public class AdministraScan {
         return documentos;
     }
     
+    public void generarcsv(ArrayList<String> cts){
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        String centrotrabajo = "";
+        String curp1 ="";
+        String completo = "";
+        try
+        {
+            //fichero = new FileWriter("/home/enriquedg/Desktop/dsinteg/escaneos/reporte_estado_expedientes.csv");
+            fichero = new FileWriter(conf.carpetaRemota + "reporte_estado_expedientes.csv");
+            pw = new PrintWriter(fichero);
+            pw.println("Centro de Trabajo,CURP,Estado Expediente");
+            for(String ct : cts){
+                String dirCT = conf.carpetaCT + ct.trim();
+                File dir_expedientes = new File(dirCT);
+                centrotrabajo = ct;
+                ArrayList<String> curps = new ArrayList<>(Arrays.asList(dir_expedientes.list()));
+                for(String curp : curps){
+                    completo = "Completo";
+                    curp1 = curp;
+                    String dircurp = dirCT + "\\" + curp.trim();
+                    File doc = new File(dircurp);
+                    ArrayList<String> documentos = new ArrayList<>(Arrays.asList(doc.list()));
+                    ArrayList<String> claves = this.RetornaCT(documentos);
+                    ArrayList<String> temporal = new ArrayList<>();
+                    System.out.println(curp);
+                    for(String clave: claves){
+                        if(conf.OBLIGATORIOS.contains(clave)){
+                            temporal.add(clave);
+                        }
+                    }
+                    if(temporal.size() != conf.OBLIGATORIOS.size()){
+                        completo = "Incompleto";
+                    }
+                    pw.println(centrotrabajo + "," + curp1 + "," + completo);
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        } 
+        finally {
+            try {
+                if (null != fichero)
+                    fichero.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+        }
+        JOptionPane.showMessageDialog(null, "Se genero el reporte de expedientes\nVer en C:\\escaneos\\");
+    }
+    
+    
     public ArrayList<SubSistema> verificarexpedientes(){
         File f = new File(conf.carpetaCT); 
         ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
-        ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
+        this.generarcsv(cts);
+        /*ArrayList<SubSistema> sub_sistemas = this.getsubsistemas(cts);
         ArrayList<CentroTrabajo> centros_trabajo = this.getCTS(cts);
         for(SubSistema sub : sub_sistemas)
         {
@@ -220,7 +277,7 @@ public class AdministraScan {
                         expediente.faltantes.add(requerido);
                     }
                 }*/
-            }
+            /*}
             for (CentroTrabajo centrot : centros_trabajo)
             {
                 for (Empleado empleado : empleados)
@@ -246,7 +303,7 @@ public class AdministraScan {
                     System.out.println("Documentos: " + documento.getEscaneado());
                 }
             }
-        }*/
+        }
         for (SubSistema subsis : sub_sistemas)
         {
             //ArrayList<CentroTrabajo> ct = ;
@@ -272,6 +329,7 @@ public class AdministraScan {
                 }
             }
         }
-        return sub_sistemas;
+        return sub_sistemas;*/
+        return null;
     }
 }

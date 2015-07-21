@@ -55,6 +55,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
         txtExpedientesEscaneados = new javax.swing.JLabel();
         txtExpedientesCompletos = new javax.swing.JLabel();
         button1 = new java.awt.Button();
+        jButton1 = new javax.swing.JButton();
         panelSubSistema = new javax.swing.JPanel();
         scrollSubSistema = new javax.swing.JScrollPane();
         listaSubSistema = new javax.swing.JList();
@@ -101,6 +102,13 @@ public class frmAdministraScan extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Generar reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCabeceraLayout = new javax.swing.GroupLayout(panelCabecera);
         panelCabecera.setLayout(panelCabeceraLayout);
         panelCabeceraLayout.setHorizontalGroup(
@@ -117,6 +125,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtExpedientesCompletos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(42, 42, 42)
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCabeceraLayout.createSequentialGroup()
                         .addGroup(panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +153,8 @@ public class frmAdministraScan extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtExpedientesEscaneados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtExpedientesCompletos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtExpedientesCompletos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1))
                         .addGap(9, 9, 9))
                     .addGroup(panelCabeceraLayout.createSequentialGroup()
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,6 +479,12 @@ public class frmAdministraScan extends javax.swing.JFrame {
         this.listaDocumentosOp.repaint();
         this.visualizaDocumentos(em.getExpediente());
     }//GEN-LAST:event_listaPlantillaMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        AdministraScan adm_scan = new AdministraScan();
+        adm_scan.verificarexpedientes();
+    }//GEN-LAST:event_jButton1ActionPerformed
     //debe de pintar en el JList listaSubSistema los subsistemas
    public void visualizaSubSistemas(ArrayList<SubSistema> arreglosubs){    
        listaSubSistema.removeAll(); 
@@ -554,7 +571,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
                 AdministraScan obj = new AdministraScan();
                 frmAdministraScan adm =new frmAdministraScan();
                 adm.setVisible(true);
-                adm.visualizaSubSistemas(obj.verificarexpedientes());
+                //adm.visualizaSubSistemas(obj.verificarexpedientes());
                 adm.repaint();
             }
         });
@@ -563,6 +580,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelDocumentosSecundarios;
     private java.awt.Button button1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
