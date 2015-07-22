@@ -81,6 +81,63 @@ public class OrganizaDirectorios {
         
         return retorno;
     }
+     
+    public void clasificarCAS(){
+    String rutaCAS;
+    rutaCAS = conf.carpetaCAS+"/";
+    File f = new File(rutaCAS);
+    FileUtils Archivos = new FileUtils();
+    String curpct ="";
+    System.out.println("Archivo Leido en memoria:"+f.list());
+    
+    ArrayList<String> names = new ArrayList<>(Arrays.asList(f.list()));
+        System.out.println(""+names);
+        //_____________
+        if (!names.isEmpty())
+        {
+            for (int i=0;i<names.size();i++)
+            {
+                System.out.println("Voy en :"+names.get(i));
+                String curp= (names.get(i).substring(0, 18));
+                System.out.println("Curp cortado"+curp);
+                curpct = obtenerCT(curp);
+                if(curp.equals(""))
+                    
+                        {
+                            System.out.println("Ya no hay Constancias que mover");
+                        }
+                else{
+                    System.out.println(""+curpct);
+                    String RutaOr = (conf.carpetaCAS+names.get(i).toString());
+                    String RutaDest = (conf.carpetaCT+curpct+"\\"+curp+"\\");
+                    System.out.println(""+RutaOr);
+                    System.out.println(""+RutaDest);
+                    
+                    File origen= new File(RutaOr);
+                    File destino=new  File(RutaDest);
+                    try {
+                        //System.out.println(origen);
+                        //System.out.println(destino);
+                            Archivos.moveFileToDirectory(origen, destino, resultado);
+                        //Aquí se actualiza la variable
+                         
+                    } catch(IOException E) {
+                        //System.out.println("No se pudo copiar el archivo");
+                        
+                        E.printStackTrace();
+                    }
+                    
+                }    
+            }
+            
+            
+        }
+        
+    
+    
+    
+    
+    }
     
     public boolean clasificar(){        
         //String ruta = conf.carpetaRemota+"aceptados\\";
@@ -103,6 +160,7 @@ public class OrganizaDirectorios {
                 else
                 {
                     String prueba = (String)(names.get(i).toString());
+                    System.out.println(""+prueba);
                     //String rutadestino = conf.carpetaCT + "\\" + names.get(i) + "\\";
                     String rutadestino = conf.carpetaCT + "/" + names.get(i) + "/";
                     //System.out.println("CT:"+ct);
