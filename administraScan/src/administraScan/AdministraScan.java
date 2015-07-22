@@ -308,7 +308,7 @@ public class AdministraScan {
                     e2.printStackTrace();
                 }
         }
-        JOptionPane.showMessageDialog(null, "Se genero el reporte de expedientes\nVer en C:\\escaneos\\");
+       
     }
     
     

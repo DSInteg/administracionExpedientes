@@ -26,6 +26,7 @@ import org.apache.commons.io.FileUtils;
 public class OrganizaDirectorios {
     private Configuracion conf = new Configuracion();
     private Connection connection;
+    public boolean resultado=true;
     
     public OrganizaDirectorios(){}
     
@@ -64,22 +65,40 @@ public class OrganizaDirectorios {
         }
         return ct.trim();
     }
+     public int retornaSize(){
+        
+        int retorno=100;
+        String ruta = conf.carpetaRemota+"aceptados/";
+        File f = new File(ruta);    
+        ArrayList<String> names = new ArrayList<>(Arrays.asList(f.list()));
+        System.out.println(names.size());
+        retorno = names.size(); 
+        System.out.println(names.size());
+        if(!names.isEmpty())
+        {
+            System.out.println("Ya no hay nada");
+        }
+        
+        return retorno;
+    }
     
-    public void clasificar(){        
+    public boolean clasificar(){        
         //String ruta = conf.carpetaRemota+"aceptados\\";
         String ruta = conf.carpetaRemota+"aceptados/";
         File f = new File(ruta);    
         FileUtils Files = new FileUtils();
         String ct = "";
         System.out.println(f.list());
-        ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
+        ArrayList<String> names = new ArrayList<>(Arrays.asList(f.list()));
         if(!names.isEmpty())
         {
             for (int i=0; i<names.size();i++) {
                 System.out.println(names.get(i));
+                System.out.println("hay algo");
                 ct = obtenerCT(names.get(i));
                 if(ct.equals("")){
                     System.out.println("Se acabó");
+
                 }
                 else
                 {
@@ -96,17 +115,57 @@ public class OrganizaDirectorios {
                         //System.out.println(origen);
                         //System.out.println(destino);
                         Files.moveDirectoryToDirectory(origen, destino,true);
+                        //Aquí se actualiza la variable
+                         
                     } catch(IOException E) {
                         //System.out.println("No se pudo copiar el archivo");
+                        
                         E.printStackTrace();
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null, "Se han movido exitosamente los elementos de directorio");
+          
+                                resultado=false;
         }
         else
         {
             JOptionPane.showMessageDialog(null, "No ningun elemento que mover");
+        }
+            return resultado;
+    }
+    
+    public void copiarCompletos() throws IOException
+    {
+        FileUtils Files = new FileUtils();
+        AdministraScan adm = new AdministraScan();
+        File origen;
+        File destino;
+        File f = new File(conf.carpetaCT);
+        ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
+        for(String ct : cts){
+            String dirCT = conf.carpetaCT + ct.trim();
+            File dir_expedientes = new File(dirCT);
+            ArrayList<String> curps = new ArrayList<>(Arrays.asList(dir_expedientes.list()));
+            for(String curp : curps){
+                String dircurp = dirCT + "/" + curp.trim();
+                File doc = new File(dircurp);
+                ArrayList<String> documentos = new ArrayList<>(Arrays.asList(doc.list()));
+                ArrayList<String> claves = adm.RetornaCT(documentos);
+                ArrayList<String> temporal = new ArrayList<>();
+                for(String clave: claves){
+                    if (!clave.equals("CAS")){
+                        if(conf.OBLIGATORIOS.contains(clave)){
+                            temporal.add(clave);
+                        }
+                    }
+                }
+                if(temporal.size() == conf.OBLIGATORIOS.size()-1){
+                    String ruta_destino = conf.carpetaRemota + "completos/" + ct.trim();
+                    origen = new File(dircurp);
+                    destino = new File(ruta_destino);
+                    Files.copyDirectoryToDirectory(doc, destino);
+                }
+            }
         }
     }
 }

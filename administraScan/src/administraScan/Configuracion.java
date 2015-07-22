@@ -14,6 +14,7 @@ public class Configuracion {
     //Carpetas
     final String carpetaRemota="c:\\escaneos\\";
     final String carpetaCT = this.carpetaRemota + "aceptadosCT\\";
+    final String carpetaCAS = this.carpetaRemota + "constanciasAS\\";
     //final String carpetaRemota="/home/enriquedg/Desktop/dsinteg/escaneos/";
     //final String carpetaCT = this.carpetaRemota + "aceptadosCT/";
     //final String carpetaLocal="/home/eli-vaio/Desktop/dsinteg/escaneos/";
