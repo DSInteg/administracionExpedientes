@@ -40,16 +40,22 @@ public class AdministraScan {
     
     public ArrayList<String> RetornaCT(ArrayList<String> nombres){
         ArrayList<String> claves = new ArrayList<>();
+        String[] array_numeros = {"1","2","3","4","5","6","7"};
+        ArrayList<String> numeros = new ArrayList<>(Arrays.asList(array_numeros));
         for(String nombre : nombres){
             String str="";
             StringBuffer cadena = new StringBuffer();
             String[] parts_doc = nombre.split("_");
             String [] extension_doc = parts_doc[parts_doc.length-1].split("\\.");
             String [] resultado = extension_doc[extension_doc.length-2].split("");
-            cadena =cadena.append(extension_doc[extension_doc.length-2]);
-            str = cadena.toString();
-            if(!claves.contains(str)){
-                claves.add(str);
+            if(!numeros.contains(extension_doc[extension_doc.length-2])){
+                cadena = cadena.append(extension_doc[extension_doc.length-2]);
+            }
+            if(cadena.length()>0){
+                str = cadena.toString();
+                if(!claves.contains(str)){
+                   claves.add(str);
+                }   
             }
         }
         return claves;
