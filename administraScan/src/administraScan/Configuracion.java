@@ -17,6 +17,7 @@ public class Configuracion {
     final String carpetaCAS = this.carpetaRemota + "constanciasAS\\";
     //final String carpetaRemota="/home/enriquedg/Desktop/dsinteg/escaneos/";
     //final String carpetaCT = this.carpetaRemota + "aceptadosCT/";
+    //final String carpetaCAS = this.carpetaRemota + "constanciasAS/";
     //final String carpetaLocal="/home/eli-vaio/Desktop/dsinteg/escaneos/";
     //Base de Datos local
     final String USUARIO="curp";

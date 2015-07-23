@@ -18,6 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
+import org.apache.pdfbox.exceptions.COSVisitorException;
+import org.apache.pdfbox.util.PDFMergerUtility;
 
 /**
  *
@@ -92,7 +94,6 @@ public class OrganizaDirectorios {
     
     ArrayList<String> names = new ArrayList<>(Arrays.asList(f.list()));
         System.out.println(""+names);
-        //_____________
         if (!names.isEmpty())
         {
             for (int i=0;i<names.size();i++)
@@ -126,22 +127,14 @@ public class OrganizaDirectorios {
                         
                         E.printStackTrace();
                     }
-                    
                 }    
-            }
-            
-            
+            }   
         }
-        
-    
-    
-    
-    
     }
     
     public boolean clasificar(){        
         //String ruta = conf.carpetaRemota+"aceptados\\";
-        String ruta = conf.carpetaRemota+"aceptados/";
+        String ruta = conf.carpetaRemota+"aceptados\\";
         File f = new File(ruta);    
         FileUtils Files = new FileUtils();
         String ct = "";
@@ -162,13 +155,13 @@ public class OrganizaDirectorios {
                     String prueba = (String)(names.get(i).toString());
                     System.out.println(""+prueba);
                     //String rutadestino = conf.carpetaCT + "\\" + names.get(i) + "\\";
-                    String rutadestino = conf.carpetaCT + "/" + names.get(i) + "/";
+                    String rutadestino = conf.carpetaCT + "\\" + names.get(i) + "\\";
                     //System.out.println("CT:"+ct);
                     //System.out.println(rutadestino);
                     //File destino = new File(conf.carpetaCT + ct + "\\" /*+ names.get(i) + "\\"*/);
-                    File destino = new File(conf.carpetaCT + ct + "/" /*+ names.get(i) + "\\"*/);
+                    File destino = new File(conf.carpetaCT + ct + "\\" /*+ names.get(i) + "\\"*/);
                     //File origen = new File(ruta+names.get(i)+"\\");
-                    File origen = new File(ruta+names.get(i)+"/");
+                    File origen = new File(ruta+names.get(i)+"\\");
                     try {
                         //System.out.println(origen);
                         //System.out.println(destino);
@@ -182,8 +175,7 @@ public class OrganizaDirectorios {
                     }
                 }
             }
-          
-                                resultado=false;
+            resultado=false;
         }
         else
         {
@@ -205,7 +197,7 @@ public class OrganizaDirectorios {
             File dir_expedientes = new File(dirCT);
             ArrayList<String> curps = new ArrayList<>(Arrays.asList(dir_expedientes.list()));
             for(String curp : curps){
-                String dircurp = dirCT + "/" + curp.trim();
+                String dircurp = dirCT + "\\" + curp.trim();
                 File doc = new File(dircurp);
                 ArrayList<String> documentos = new ArrayList<>(Arrays.asList(doc.list()));
                 ArrayList<String> claves = adm.RetornaCT(documentos);
@@ -218,10 +210,99 @@ public class OrganizaDirectorios {
                     }
                 }
                 if(temporal.size() == conf.OBLIGATORIOS.size()-1){
-                    String ruta_destino = conf.carpetaRemota + "completos/" + ct.trim();
+                    String ruta_destino = conf.carpetaRemota + "completos\\" + ct.trim();
                     origen = new File(dircurp);
                     destino = new File(ruta_destino);
                     Files.copyDirectoryToDirectory(doc, destino);
+                }
+            }
+        }
+    }
+    
+    public void unirpdfs()
+    {
+        ArrayList<String> docs = conf.OBLIGATORIOS;
+        docs.add("CPL");
+        docs.add("CPM");
+        docs.add("CPD");
+        AdministraScan adm = new AdministraScan();
+        String ruta ="";
+        File f = new File(conf.carpetaCT);
+        ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
+        for(String ct : cts){
+            String dirCT = conf.carpetaCT + ct.trim();
+            File dir_expedientes = new File(dirCT);
+            ArrayList<String> curps = new ArrayList<>(Arrays.asList(dir_expedientes.list()));
+            for(String curp : curps){
+                String dircurp = dirCT + "\\" + curp.trim();
+                File doc = new File(dircurp);
+                ArrayList<String> documentos = new ArrayList<>(Arrays.asList(doc.list()));
+                ArrayList<String> doc_obli = new ArrayList<>();
+                ArrayList<String> temporal = new ArrayList<>();
+                String[] array_numeros = {"1","2","3","4","5","6","7"};
+                ArrayList<String> numeros = new ArrayList<>(Arrays.asList(array_numeros));
+                for(String documento :documentos){
+                    String [] parts_doc = documento.split("\\.");
+                    parts_doc = parts_doc[0].split("_");
+                    String num = parts_doc[parts_doc.length-1];
+                    if(numeros.contains(num))
+                        temporal.add(documento);
+                }
+                int num = 1;
+                int aux = 0;
+                for(int i=0;i<4;i++ ){
+                    String pre="";
+                    String pos="";
+                    for(String obli:docs){
+                        if(i==0){
+                            pre = obli;
+                            pos = obli + "_1";
+                        }
+                        if(i==1){
+                            pre = obli+ "_2";
+                            pos = obli + "_3";
+                        }
+                        if(i==2){
+                            pre = obli+ "_4";
+                            pos = obli + "_5";
+                        }
+                        if(i==3){
+                            pre = obli+ "_6";
+                            pos = obli + "_7";
+                        }
+                        String doc1="";
+                        String doc2="";
+                        for(String docu:temporal){
+                            if(docu.contains(pre))
+                                doc1 = docu;
+                            if(docu.contains(pos))
+                                doc2 = docu;
+                        }
+                        if(!doc1.equals("") && !doc2.equals("")){
+                            ruta = dircurp + "\\";
+                            PDFMergerUtility ut = new PDFMergerUtility();
+                            ut.addSource(ruta+doc1);
+                            ut.addSource(ruta+doc2);
+                            ut.setDestinationFileName(ruta+doc1);
+                            try {
+                                ut.mergeDocuments();
+                                System.out.println("Exito");
+                                System.out.println(doc1 + "---" + doc2);
+                                System.out.println(dircurp);
+                                File temp=new File(ruta+doc2);
+                                System.out.println("Borrar: "+ruta+doc2);
+                                temp.delete();
+                            } catch (IOException ex) {
+                                System.out.println("Error fatal");
+                                ex.printStackTrace();
+                                Logger.getLogger(OrganizaDirectorios.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (COSVisitorException ex) {
+                                System.out.println("Error Libreria");
+                                ex.printStackTrace();
+                                Logger.getLogger(OrganizaDirectorios.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -140,6 +140,11 @@ public class frmAdministraScan extends javax.swing.JFrame {
         });
 
         BotonUnirArchivos.setLabel("Unir Archivos Frente con Vuelta");
+        BotonUnirArchivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonUnirArchivosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCabeceraLayout = new javax.swing.GroupLayout(panelCabecera);
         panelCabecera.setLayout(panelCabeceraLayout);
@@ -575,6 +580,12 @@ public class frmAdministraScan extends javax.swing.JFrame {
     obj.clasificarCAS();
         System.out.println("Hay Documentos");
     }//GEN-LAST:event_BotonClassCASActionPerformed
+
+    private void BotonUnirArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonUnirArchivosActionPerformed
+        // TODO add your handling code here:
+        OrganizaDirectorios obj= new OrganizaDirectorios();
+        obj.unirpdfs();
+    }//GEN-LAST:event_BotonUnirArchivosActionPerformed
     //debe de pintar en el JList listaSubSistema los subsistemas
    public void visualizaSubSistemas(ArrayList<SubSistema> arreglosubs){    
        listaSubSistema.removeAll(); 

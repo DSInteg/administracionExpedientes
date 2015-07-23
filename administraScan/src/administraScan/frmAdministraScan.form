@@ -260,6 +260,9 @@
           <Properties>
             <Property name="label" type="java.lang.String" value="Unir Archivos Frente con Vuelta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonUnirArchivosActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
