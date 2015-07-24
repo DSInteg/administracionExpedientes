@@ -584,7 +584,11 @@ public class frmAdministraScan extends javax.swing.JFrame {
     private void BotonUnirArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonUnirArchivosActionPerformed
         // TODO add your handling code here:
         OrganizaDirectorios obj= new OrganizaDirectorios();
+        Progreso barra= new Progreso(jProgressBar, LabelProgreso);
+        barra.getjProgressBar().setIndeterminate(true);
         obj.unirpdfs();
+        barra.getjProgressBar().setIndeterminate(false);
+        JOptionPane.showMessageDialog(null, "Se unieron pdfs con éxito. Ver en C:\\escaneos\\aceptadosCT\\");
     }//GEN-LAST:event_BotonUnirArchivosActionPerformed
     //debe de pintar en el JList listaSubSistema los subsistemas
    public void visualizaSubSistemas(ArrayList<SubSistema> arreglosubs){    
