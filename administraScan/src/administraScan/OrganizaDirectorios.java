@@ -70,7 +70,7 @@ public class OrganizaDirectorios {
      public int retornaSize(){
         
         int retorno=100;
-        String ruta = conf.carpetaRemota+"aceptados/";
+        String ruta = conf.carpetaRemota+"aceptados\\";
         File f = new File(ruta);    
         ArrayList<String> names = new ArrayList<>(Arrays.asList(f.list()));
         System.out.println(names.size());
@@ -86,7 +86,7 @@ public class OrganizaDirectorios {
      
     public void clasificarCAS(){
     String rutaCAS;
-    rutaCAS = conf.carpetaCAS+"/";
+    rutaCAS = conf.carpetaCAS+"\\";
     File f = new File(rutaCAS);
     FileUtils Archivos = new FileUtils();
     String curpct ="";
@@ -210,7 +210,30 @@ public class OrganizaDirectorios {
                     }
                 }
                 if(temporal.size() == conf.OBLIGATORIOS.size()-1){
-                    String ruta_destino = conf.carpetaRemota + "completos\\" + ct.trim();
+                    String clave = "";
+                    String nombre_ss="";
+                    clave = ct.substring(3, 5);
+                    this.conectarbd();
+                    String consultaDescripcionSS="Select descripcion from cg_nivel_educativo where nivel_educativo = ?";
+                    //System.out.println(consultaDescripcionSS);
+                    try {
+                        PreparedStatement SPreparada;
+                        SPreparada= connection.prepareStatement(consultaDescripcionSS);
+                        SPreparada.setString(1,clave);
+                        ResultSet resultadoDescripcion=SPreparada.executeQuery();
+                        if(resultadoDescripcion.next()){
+                            nombre_ss=resultadoDescripcion.getString("descripcion").trim();
+                            //System.out.println(clave);
+                            //System.out.println(Id);
+                        }            
+                    SPreparada.close();
+                    connection.close(); 
+
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(SubSistema.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    String ruta_destino = conf.carpetaRemota + "completos\\" + nombre_ss + "\\" + ct.trim();
                     origen = new File(dircurp);
                     destino = new File(ruta_destino);
                     Files.copyDirectoryToDirectory(doc, destino);
