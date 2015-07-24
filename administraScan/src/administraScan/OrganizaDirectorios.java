@@ -221,10 +221,7 @@ public class OrganizaDirectorios {
     
     public void unirpdfs()
     {
-        ArrayList<String> docs = conf.OBLIGATORIOS;
-        docs.add("CPL");
-        docs.add("CPM");
-        docs.add("CPD");
+        ArrayList<String> docs = new ArrayList<>(Arrays.asList(conf.CLAVES_DOC));
         AdministraScan adm = new AdministraScan();
         String ruta ="";
         File f = new File(conf.carpetaCT);
