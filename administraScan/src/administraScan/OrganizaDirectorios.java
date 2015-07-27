@@ -227,6 +227,7 @@ public class OrganizaDirectorios {
     
     public void uniendopdfs(String ruta, String documento1, String documento2){
         PDFMergerUtility ut = new PDFMergerUtility();
+        CompresorZIP compresor = new CompresorZIP();
         File d1 = new File(ruta+documento1);
         File d2 = new File(ruta+documento2);
         if(d1.exists() && d2.exists()){
@@ -240,6 +241,7 @@ public class OrganizaDirectorios {
                 File temp=new File(ruta+documento2);
                 System.out.println("Borrar: "+ruta+documento2);
                 temp.delete();
+                compresor.comprimirArchivo(ruta+documento1, documento1.replace(".pdf", ""));
             } catch (IOException ex) {
                 System.out.println("Error fatal");
                 ex.printStackTrace();
