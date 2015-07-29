@@ -270,7 +270,7 @@ public class AdministraScan {
         try
         {
             //fichero = new FileWriter("/home/enriquedg/Desktop/dsinteg/escaneos/reporte_estado_expedientes.csv");
-            fichero = new FileWriter(conf.carpetaRemota + "reporte_estado_expedientes_1.csv");
+            fichero = new FileWriter(conf.carpetaRemota + "reporte_estado_expedientes.csv");
             pw = new PrintWriter(fichero);
             pw.println("Centro de Trabajo,CURP,Estado Expediente,Faltantes");
             File f = new File(conf.carpetaCT);

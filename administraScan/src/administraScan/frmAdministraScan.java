@@ -123,7 +123,7 @@ public class frmAdministraScan extends javax.swing.JFrame {
             }
         });
 
-        BotonMoverECompletos.setLabel("Mover Expedientes Completos");
+        BotonMoverECompletos.setLabel("Copiar Expedientes Completos");
         BotonMoverECompletos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonMoverECompletosActionPerformed(evt);

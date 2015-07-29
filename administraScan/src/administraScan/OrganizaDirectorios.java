@@ -187,15 +187,14 @@ public class OrganizaDirectorios {
                 File doc = new File(dircurp);
                 ArrayList<String> documentos = new ArrayList<>(Arrays.asList(doc.list()));
                 ArrayList<String> claves = adm.RetornaCT(documentos);
-                ArrayList<String> temporal = new ArrayList<>();
-                for(String clave: claves){
-                    if (!clave.equals("CAS")){
-                        if(conf.OBLIGATORIOS.contains(clave)){
-                            temporal.add(clave);
-                        }
-                    }
-                }
-                if(temporal.size() == conf.OBLIGATORIOS.size()-1){
+                ArrayList<String> obli_cedula = new ArrayList<>(Arrays.asList(conf.DOC_R));
+                obli_cedula.remove("CUGE");
+                boolean completo_cedula = claves.containsAll(obli_cedula) && 
+                            (claves.contains("CPL") || 
+                             claves.contains("CPM") || 
+                             claves.contains("CPD")) && 
+                            !claves.contains("CUGE");
+                if(claves.containsAll(conf.OBLIGATORIOS) || completo_cedula){
                     String clave = "";
                     String nombre_ss="";
                     clave = ct.substring(3, 5);
@@ -214,12 +213,16 @@ public class OrganizaDirectorios {
 
 
                     } catch (SQLException ex) {
-                        Logger.getLogger(SubSistema.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(OrganizaDirectorios.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     String ruta_destino = conf.carpetaRemota + "completos\\" + nombre_ss + "\\" + ct.trim();
                     origen = new File(dircurp);
                     destino = new File(ruta_destino);
-                    Files.copyDirectoryToDirectory(doc, destino);
+                    File destino_final = new File(ruta_destino + "\\" + curp.trim());
+                    if(!destino_final.exists()){
+                        Files.copyDirectoryToDirectory(doc, destino);
+                        System.out.println("Movi carpeta: " + doc.getAbsolutePath() + " a " + destino_final.getAbsolutePath());
+                    }
                 }
             }
         }
