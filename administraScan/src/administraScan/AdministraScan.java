@@ -274,6 +274,8 @@ public class AdministraScan {
             pw = new PrintWriter(fichero);
             pw.println("Centro de Trabajo,CURP,Estado Expediente,Faltantes");
             File f = new File(conf.carpetaCT);
+            ArrayList<String> obli_CM = new ArrayList<>(Arrays.asList(conf.DOC_R));
+            obli_CM.add("CM");
             this.conectarbd();
             ArrayList<String> cts = new ArrayList<>(Arrays.asList(f.list()));
             ArrayList<String> faltantes;
@@ -296,6 +298,7 @@ public class AdministraScan {
                                 curp_bd=result.getString("curp").trim();
                                 status = "No entregó";
                                 faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
+                                faltantes.add("CM");
                                 pw.println(ct + "," + curp_bd + "," + status + "," + faltantes.toString().replace("[", "").replace("]", ""));
                             }
                         }
@@ -308,6 +311,7 @@ public class AdministraScan {
                                 if(!curps.contains(curp_bd)){
                                     status = "No entregó";
                                     faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
+                                    faltantes.add("CM");
                                 }
                                 else{
                                     String dircurp = dirCT + "\\" + curp_bd.trim();
@@ -317,22 +321,30 @@ public class AdministraScan {
                                     if(documentos.isEmpty()){
                                         status = "No entregó";
                                         faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
+                                        faltantes.add("CM");
                                     }
                                     else if(documentos.size()==1){
                                         if(claves.get(0).equals("CAS")){
                                             status = "No entregó";
                                             faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
                                             faltantes.remove("CAS");
+                                            faltantes.add("CM");
                                         }
                                         else{
                                             status = "Incompleto";
-                                            faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
-                                            faltantes.remove(claves.get(0));
+                                            if(claves.get(0)=="CM"){
+                                                faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
+                                            }else{
+                                                faltantes = new ArrayList<>(Arrays.asList(conf.DOC_R));
+                                                faltantes.remove(claves.get(0));
+                                                faltantes.add("CM");
+                                            }
                                         }
                                     }
                                     else{
                                         faltantes = new ArrayList<>();
                                         ArrayList<String> obli_cedula= new ArrayList<>(Arrays.asList(conf.DOC_R));
+                                        obli_cedula.add("CM");
                                         obli_cedula.remove("CUGE");
                                         if(claves.containsAll(obli_cedula) &&
                                                 (claves.contains("CPL") || 
@@ -342,11 +354,11 @@ public class AdministraScan {
                                             status = "Completo Cédula";
                                             faltantes.add("CUGE");
                                         }
-                                        else if(claves.containsAll(conf.OBLIGATORIOS))
+                                        else if(claves.containsAll(obli_CM))
                                             status = "Completo";
                                         else{
                                             status = "Incompleto";
-                                            for(String oblis : conf.OBLIGATORIOS)
+                                            for(String oblis : obli_CM)
                                                 if(!claves.contains(oblis))
                                                     faltantes.add(oblis);
                                         }
